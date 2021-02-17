@@ -1,0 +1,14 @@
+.profile__info {
+  margin: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  flex-grow: 2;
+}
+
+@media screen and (min-width:576px){
+  .profile__info{
+    padding-left: 30px;
+  }
+}
