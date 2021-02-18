@@ -1,4 +1,9 @@
 .element__like::before {
-  content:url(../../../images/element/like.svg);
   display: block;
+}
+
+.element__like:hover::before {
+  opacity: 50%;
+  cursor: pointer;
+  transition: 0.3s;
 }

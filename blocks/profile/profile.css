@@ -9,6 +9,6 @@
   .profile {
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 47px;
+    padding-bottom: 50px;
   }
 }
