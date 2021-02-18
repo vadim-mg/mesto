@@ -1,0 +1,4 @@
+.element__like::before {
+  content:url(../../../images/element/like.svg);
+  display: block;
+}
