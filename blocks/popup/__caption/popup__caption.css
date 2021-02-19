@@ -1,4 +1,4 @@
-.edit-form__caption {
+.popup__caption {
   color: black;
   font-weight: 900;
   font-size: 18px;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .edit-form__caption {
+  .popup__caption {
     font-size: 24px;
     margin-bottom: 6px;
   }

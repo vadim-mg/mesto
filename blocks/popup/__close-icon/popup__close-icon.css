@@ -1,17 +1,17 @@
-  .edit-form__close-icon::before {
-    content: url(../../../images/edit-form/close-icon.svg);
+  .popup__close-icon::before {
+    content: url(../../../images/popup/close-icon.svg);
     position: absolute;
     top: -43px;
     right: 7px;
   }
-  .edit-form__close-icon:hover::before{
+  .popup__close-icon:hover::before{
     opacity: 0.6;
     transition: 0.3s;
     cursor: pointer;
   }
 
   @media screen and (min-width:768px) {
-    .edit-form__close-icon::before {
+    .popup__close-icon::before {
       top: -31px;
       right: -31px;
       transform: scale(1.5);

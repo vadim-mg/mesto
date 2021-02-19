@@ -42,13 +42,11 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 /*  */
 
-@import url(../blocks/overlay/overlay.css);
-@import url(../blocks/overlay/_hidden/overlay_hidden.css);
-/*  */
-
-@import url(../blocks/edit-form/edit-form.css);
-@import url(../blocks/edit-form/__close-icon/edit-form__close-icon.css);
-@import url(../blocks/edit-form/__fields/edit-form__fields.css);
-@import url(../blocks/edit-form/__caption/edit-form__caption.css);
-@import url(../blocks/edit-form/__field/edit-form__field.css);
-@import url(../blocks/edit-form/__button/edit-form__button.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__close-icon/popup__close-icon.css);
+@import url(../blocks/popup/__fields/popup__fields.css);
+@import url(../blocks/popup/__caption/popup__caption.css);
+@import url(../blocks/popup/__field/popup__field.css);
+@import url(../blocks/popup/__button/popup__button.css);
