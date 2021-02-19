@@ -7,7 +7,7 @@
   background-color: transparent;
   border: 0;
   margin-left: 10px;
-  display: inline-block;
+  display: inline;
 }
 
 .profile__edit-button:hover {
