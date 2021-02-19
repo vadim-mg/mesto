@@ -1,5 +1,6 @@
 .profile__info {
   margin: 0;
+  padding: 26px 0 0;
   font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
@@ -10,12 +11,13 @@
 
 @media screen and (min-width:576px) {
   .profile__info {
+    text-align: left;
     padding: 0 3.9vw;
   }
 }
 
 @media screen and (min-width:768px) {
   .profile__info {
-    padding: 0 30px;
+    padding: 16px 30px 0;
   }
 }

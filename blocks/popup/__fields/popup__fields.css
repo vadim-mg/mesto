@@ -1,0 +1,7 @@
+.popup__fields {
+  padding: 0;
+  border: 0;
+  display: grid;
+  min-inline-size: auto;
+  overflow: hidden;
+}

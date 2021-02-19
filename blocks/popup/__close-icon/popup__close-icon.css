@@ -1,0 +1,19 @@
+  .popup__close-icon::before {
+    content: url(../../../images/popup/close-icon.svg);
+    position: absolute;
+    top: -43px;
+    right: 7px;
+  }
+  .popup__close-icon:hover::before{
+    opacity: 0.6;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width:768px) {
+    .popup__close-icon::before {
+      top: -31px;
+      right: -31px;
+      transform: scale(1.5);
+    }
+  }

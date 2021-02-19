@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title lang="en">Mesto</title>
   <link rel="stylesheet" href="pages/index.css">
+
 </head>
 
 <body class="page">
@@ -19,48 +20,68 @@
     <section class="profile">
       <img src="images/avatar/kusto.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit-button"></button></h1>
-
+        <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
       <button class="profile__add-button"></button>
     </section>
     <section class="elements">
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаевск</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Карачаевск</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/dombay.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/elbrus-2.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_active"></span></figcaption>
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_active"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/dombay-2.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/karachaevo-cherkesiya.jpg" alt="" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаево-Черкесия</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Карачаево-Черкесия</span><span
+                class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
     </section>
   </main>
   <footer class="footer container">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
+
+  <div class="popup">
+    <form action="" class="popup__container">
+      <span class="popup__close-icon"></span>
+      <fieldset class="popup__fields">
+        <legend class="popup__caption">Редактировать профиль</legend>
+        <input type="text" class="popup__field" id="name" value="">
+        <input type="text" class="popup__field" id="description" value="">
+        <input type="submit" class="popup__button" id="submit" value="Сохранить">
+      </fieldset>
+    </form>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>
