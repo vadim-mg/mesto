@@ -27,7 +27,8 @@
 /*  */
 
 @import url(../blocks/elements/elements.css);
-@import url(../blocks/elements/__item/elements__item.css);
+/*  */
+
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__caption/element__caption.css);
@@ -39,3 +40,15 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+/*  */
+
+@import url(../blocks/overlay/overlay.css);
+@import url(../blocks/overlay/_hidden/overlay_hidden.css);
+/*  */
+
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__close-icon/edit-form__close-icon.css);
+@import url(../blocks/edit-form/__fields/edit-form__fields.css);
+@import url(../blocks/edit-form/__caption/edit-form__caption.css);
+@import url(../blocks/edit-form/__field/edit-form__field.css);
+@import url(../blocks/edit-form/__button/edit-form__button.css);

@@ -1,0 +1,23 @@
+.edit-form__button {
+  color: #FFF;
+  background-color: #000;
+  font-size: 14px;
+  line-height: 1.21;
+  padding: 15px 0;
+  margin-top: 45px;
+  border-radius: 2px;
+  border: 0;
+}
+
+.edit-form__button:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .edit-form__button {
+    margin-top: 49px;
+    font-size: 18px;
+  }
+}

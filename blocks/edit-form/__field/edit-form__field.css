@@ -1,0 +1,12 @@
+.edit-form__field {
+  font-size: 14px;
+  line-height: 17px;
+  border: 0;
+  border-bottom: 1px solid #00000033;
+  padding: 8px 0;
+  margin-top: 24px;
+}
+
+.edit-form__field:first-of-type{
+  margin-top: 0;
+}

@@ -26,41 +26,61 @@
       <button class="profile__add-button"></button>
     </section>
     <section class="elements">
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаевск</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Карачаевск</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/dombay.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/elbrus-2.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_active"></span></figcaption>
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_active"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/dombay-2.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
-      <figure class="elements__item element">
+      <figure class="element">
         <img src="images/elements/karachaevo-cherkesiya.jpg" alt="" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаево-Черкесия</span><span class="element__like element__like_disabled"></span></figcaption>
+          <span class="element__text">Карачаево-Черкесия</span><span
+                class="element__like element__like_disabled"></span>
+        </figcaption>
       </figure>
     </section>
   </main>
   <footer class="footer container">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
+
+  <div class="overlay overlay_hidden">
+    <form action="" class="edit-form">
+      <span class="edit-form__close-icon"></span>
+      <fieldset class="edit-form__fields">
+        <legend class="edit-form__caption">Редактировать профиль</legend>
+        <input type="text" class="edit-form__field" id="name" value="Жак-Ив Кусто">
+        <input type="text" class="edit-form__field" id="description" value="Исследователь океана">
+        <input type="submit" class="edit-form__button" id="submit" value="Сохранить">
+      </fieldset>
+    </form>
+  </div>
+
 </body>
 
 </html>

@@ -1,0 +1,22 @@
+.edit-form {
+  background-color: #ffffff;
+  margin: auto;
+  width: calc(100vw - 19px * 2);
+  max-width: 430px;
+  border-radius: 10px;
+  padding: 25px 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .edit-form {
+    padding: 34px;
+  }
+}
+
+@media screen and (max-width:300px) {
+  .edit-form {
+    width: calc( 100vw - 6px);
+  }
+}
