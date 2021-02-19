@@ -1,0 +1,9 @@
+.element__like::before {
+  display: block;
+}
+
+.element__like:hover::before {
+  opacity: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}

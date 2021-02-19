@@ -1,0 +1,5 @@
+@media screen and (max-width: 576px) {
+  .container_w100-on-sm {
+    width: 100%;
+  }
+}

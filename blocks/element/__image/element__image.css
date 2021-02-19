@@ -1,0 +1,6 @@
+.element__image {
+  width: 100%;
+  display: block;
+  min-height: 282px;
+  object-fit: cover;
+}

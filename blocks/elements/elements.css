@@ -1,1 +1,12 @@
-.elements {}
+.elements {
+  display: grid;
+  grid-gap: 20px 17px;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  box-sizing: border-box;
+}
+
+@media screen and (max-width:320px) {
+  .elements {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}

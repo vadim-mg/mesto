@@ -10,23 +10,52 @@
 </head>
 
 <body class="page">
-  <header class="header container">
-      <a href="#" class="header__link">
-        <img src="images/logo/logo.svg" class="header__logo" alt="логотип: Mesto - Russia">
-      </a>
+  <header class="header container container_w100-on-sm">
+    <a href="#" class="header__link">
+      <img src="images/logo/logo.svg" class="header__logo" alt="логотип: Mesto - Russia">
+    </a>
   </header>
   <main class="content container">
     <section class="profile">
       <img src="images/avatar/kusto.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто&nbsp;<button class="profile__edit-button"></button></h1>
+        <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit-button"></button></h1>
 
         <p class="profile__description">Исследователь океана</p>
       </div>
       <button class="profile__add-button"></button>
     </section>
     <section class="elements">
-
+      <figure class="elements__item element">
+        <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Карачаевск</span><span class="element__like element__like_disabled"></span></figcaption>
+      </figure>
+      <figure class="elements__item element">
+        <img src="images/elements/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_disabled"></span></figcaption>
+      </figure>
+      <figure class="elements__item element">
+        <img src="images/elements/dombay.jpg" alt="Домбай" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+      </figure>
+      <figure class="elements__item element">
+        <img src="images/elements/elbrus-2.jpg" alt="Гора Эльбрус" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Гора Эльбрус</span><span class="element__like element__like_active"></span></figcaption>
+      </figure>
+      <figure class="elements__item element">
+        <img src="images/elements/dombay-2.jpg" alt="Домбай" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Домбай</span><span class="element__like element__like_disabled"></span></figcaption>
+      </figure>
+      <figure class="elements__item element">
+        <img src="images/elements/karachaevo-cherkesiya.jpg" alt="" class="element__image">
+        <figcaption class="element__caption">
+          <span class="element__text">Карачаево-Черкесия</span><span class="element__like element__like_disabled"></span></figcaption>
+      </figure>
     </section>
   </main>
   <footer class="footer container">

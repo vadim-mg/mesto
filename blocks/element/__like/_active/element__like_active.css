@@ -1,0 +1,4 @@
+.element__like_active::before {
+  content: url(../../../../images/element/like_active.svg);
+  transition: 0.3s;
+}
