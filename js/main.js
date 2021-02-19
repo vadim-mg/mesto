@@ -12,8 +12,6 @@ let popupDescription = popup.querySelector('#description');
 
 // Показыавем POPUP
 function showPopup() {
-  // console.log(popupName);
-  // console.log(popupDescription);
   popupName.value = profileName.textContent;
   popupDescription.value = profileDescription.textContent;
   popup.classList.add('popup_opened');
@@ -27,14 +25,12 @@ function closePopup() {
 }
 
 // Передаем данные из POPUP на страницу
-function savePopup(evt){
-  // debugger;
+function savePopup(evt) {
   evt.preventDefault();
-  profileName.innerText = popupName.value;
+  profileName.textContent = popupName.value;
   profileDescription.textContent = popupDescription.value;
   closePopup();
 }
-
 
 // Вешаем обработчики событий на кнопки
 editButton.addEventListener('click', showPopup);
