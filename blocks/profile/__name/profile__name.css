@@ -4,6 +4,7 @@
   line-height: 1.22;
   font-weight: 500;
   padding-left: 27px;
+  display: inline-block;
 }
 
 @media screen and (min-width:576px) {
