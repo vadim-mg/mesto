@@ -3,7 +3,8 @@
   line-height: 1.22;
   font-weight: 500;
   padding-left: 27px;
-  display: inline;
+  margin: 0;
+  grid-area: name;
 }
 
 @media screen and (min-width:576px) {

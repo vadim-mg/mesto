@@ -3,6 +3,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
+  grid-area: description;
 }
 
 @media screen and (min-width:576px) {
