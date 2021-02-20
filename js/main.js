@@ -6,9 +6,10 @@ let profileDescription = profileInfo.querySelector('.profile__description');
 
 // Выбираем все нужные элементы из POPUP
 let popup = document.querySelector('.popup');
-let closePopupButton = popup.querySelector('.popup__close-icon');
-let popupName = popup.querySelector('#name');
-let popupDescription = popup.querySelector('#description');
+let popupContainer = popup.querySelector('.popup__container');
+let closePopupButton = popupContainer.querySelector('.popup__close-icon');
+let popupName = popupContainer.querySelector('#name');
+let popupDescription = popupContainer.querySelector('#description');
 
 // Показыавем POPUP
 function showPopup() {
@@ -35,4 +36,4 @@ function savePopup(evt) {
 // Вешаем обработчики событий на кнопки
 editButton.addEventListener('click', showPopup);
 closePopupButton.addEventListener('click', closePopup);
-popup.addEventListener('submit', savePopup);
+popupContainer.addEventListener('submit', savePopup);
