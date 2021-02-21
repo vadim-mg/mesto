@@ -7,7 +7,7 @@ let profileDescription = profileInfo.querySelector('.profile__description');
 // Выбираем все нужные элементы из POPUP
 let popup = document.querySelector('.popup');
 let popupContainer = popup.querySelector('.popup__container');
-let closePopupButton = popupContainer.querySelector('.popup__close-icon');
+let closePopupButton = popupContainer.querySelector('.popup__close-button');
 let popupName = popupContainer.querySelector('#name');
 let popupDescription = popupContainer.querySelector('#description');
 

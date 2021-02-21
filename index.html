@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title lang="en">Mesto</title>
+  <title>Mesto</title>
   <link rel="stylesheet" href="pages/index.css">
 
 </head>
@@ -18,65 +18,71 @@
   </header>
   <main class="content container">
     <section class="profile">
-      <img src="images/avatar/kusto.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+      <img src="images/avatar/kusto.jpg" alt="Фото профиля" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button"></button>
+        <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button" type="button"
+                aria-label="edit_profile"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button class="profile__add-button"></button>
+      <button class="profile__add-button" type="button" aria-label="add_profile"></button>
     </section>
     <section class="elements">
       <figure class="element">
         <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаевск</span><span class="element__like"></span>
+          <h2 class="element__text">Карачаевск</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="images/elements/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like"></span>
+          <h2 class="element__text">Гора Эльбрус</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="images/elements/dombay.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like"></span>
+          <h2 class="element__text">Домбай</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="images/elements/elbrus-2.jpg" alt="Гора Эльбрус" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Гора Эльбрус</span><span class="element__like"></span>
+          <h2 class="element__text">Гора Эльбрус</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="images/elements/dombay-2.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Домбай</span><span class="element__like"></span>
+          <h2 class="element__text">Домбай</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="images/elements/karachaevo-cherkesiya.jpg" alt="Карачаево-Черкесия" class="element__image">
         <figcaption class="element__caption">
-          <span class="element__text">Карачаево-Черкесия</span><span
-                class="element__like element__like_disabled"></span>
+          <h2 class="element__text">Карачаево-Черкесия</h2>
+          <button class="element__like" type="button" aria-label="like"></button>
         </figcaption>
       </figure>
     </section>
   </main>
   <footer class="footer container">
-    <p class="footer__copyright">© 2020 Mesto Russia</p>
+    <p class="footer__copyright">&COPY 2020 Mesto Russia</p>
   </footer>
 
   <div class="popup">
-    <form action="" class="popup__container" autocomplete="off">
-      <span class="popup__close-icon"></span>
+    <form name="popup" class="popup__container" autocomplete="off">
+      <button class="popup__close-button" type="button" aria-label="close_popup"></button>
       <fieldset class="popup__fields">
         <legend class="popup__caption">Редактировать профиль</legend>
-        <input type="text" class="popup__field" id="name" value="">
-        <input type="text" class="popup__field" id="description" value="">
-        <input type="submit" class="popup__button" id="submit" value="Сохранить">
+        <input type="text" class="popup__field" id="name" name="name" value="">
+        <input type="text" class="popup__field" id="description" name="description" value="">
+        <button type="submit" class="popup__button">Сохранить</button>
       </fieldset>
     </form>
   </div>

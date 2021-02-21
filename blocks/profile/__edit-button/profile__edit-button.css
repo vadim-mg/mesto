@@ -6,7 +6,6 @@
   height: 18px;
   background-color: transparent;
   border: 0;
-  margin-left: 10px;
   grid-area: button;
 }
 
@@ -16,10 +15,13 @@
   cursor: pointer;
 }
 
+.profile__edit-button:focus {
+  outline: 0;
+}
+
 @media screen and (min-width: 768px) {
   .profile__edit-button {
     width: 24px;
     height: 24px;
-    margin-left: 18px;
   }
 }

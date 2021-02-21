@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.popup__button:focus {
+  outline: 0;
+}
+
 @media screen and (min-width: 768px) {
   .popup__button {
     margin-top: 49px;
