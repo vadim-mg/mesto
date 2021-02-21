@@ -21,8 +21,6 @@ function showPopup() {
 // Закрываем POPUP
 function closePopup() {
   popup.classList.remove('popup_opened');
-  popupName.value = '';
-  popupDescription.value = '';
 }
 
 // Передаем данные из POPUP на страницу
