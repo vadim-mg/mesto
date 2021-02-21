@@ -4,7 +4,7 @@
   box-sizing: border-box;
   border: 0;
   padding: 0;
-  background: url(../../../../images/element/like.svg);
+  background: url(../../../images/element/like.svg);
   background-repeat: no-repeat;
   background-size: contain;
   transition: 0.3s;
@@ -17,7 +17,7 @@
 }
 
 .element__like:active {
-  background: url(../../../../images/element/like_active.svg);
+  background: url(../../../images/element/like_active.svg);
   border: 0;
   opacity: 1;
 }
