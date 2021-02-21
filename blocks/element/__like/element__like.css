@@ -1,9 +1,15 @@
 .element__like::before {
   display: block;
+  content: url(../../../../images/element/like.svg);
+  transition: 0.3s;
 }
 
 .element__like:hover::before {
   opacity: 50%;
   cursor: pointer;
   transition: 0.3s;
+}
+
+.element__like:active {
+  content: url(../../../../images/element/like_active.svg);
 }

@@ -1,4 +1,0 @@
-.element__like_disabled::before {
-  content: url(../../../../images/element/like.svg);
-  transition: 0.3s;
-}
