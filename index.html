@@ -42,13 +42,25 @@
     <p class="footer__copyright">&COPY; 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
-    <form name="popup" class="popup__container" autocomplete="off">
+  <div class="popup popup_edit">
+    <form name="popup-edit" class="popup__container" autocomplete="off">
       <button class="popup__close-button" type="button" aria-label="close_popup"></button>
       <fieldset class="popup__fields">
         <legend class="popup__caption">Редактировать профиль</legend>
-        <input type="text" class="popup__field" id="name" name="name" value="">
-        <input type="text" class="popup__field" id="description" name="description" value="">
+        <input type="text" class="popup__field" name="name" value="">
+        <input type="text" class="popup__field" name="description" value="">
+        <button type="submit" class="popup__button">Сохранить</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="popup popup_add">
+    <form name="popup-add" class="popup__container" autocomplete="off">
+      <button class="popup__close-button" type="button" aria-label="close_popup"></button>
+      <fieldset class="popup__fields">
+        <legend class="popup__caption">Новое место</legend>
+        <input type="text" class="popup__field" name="place" value="">
+        <input type="text" class="popup__field" name="url" value="">
         <button type="submit" class="popup__button">Сохранить</button>
       </fieldset>
     </form>
