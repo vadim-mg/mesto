@@ -31,76 +31,92 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileDescription = profileInfo.querySelector('.profile__description');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
-profileEditButton.addEventListener('click', showEditProfile);
 const profileAddButton = document.querySelector('.profile__add-button');
-profileAddButton.addEventListener('click', showAddPlace);
+
 const elements = document.querySelector('.elements');
 const cardTemplate = elements.querySelector('#card-template').content.querySelector('.element');
 
+const popupEdit = document.querySelector('.popup_edit');
+const popupEditName = popupEdit.querySelector('[name="name"]');
+const popupEditDesctiption = popupEdit.querySelector('[name="description"]');
+const popupEditButton = popupEdit.querySelector('.popup__button');
+
+const popupAdd = document.querySelector('.popup_add');
+const popupAddPlace = popupAdd.querySelector('[name="place"]');
+const popupAddUrl = popupAdd.querySelector('[name="url"]');
+const popupAddButton = popupAdd.querySelector('.popup__button');
+
 //Выводим все карточки
 initialCards.forEach(function (item) {
+  addCard(item.name, item.link, true);
+});
+
+
+/**
+ *  Вывод карточки в область elements
+ *
+ * @param {string} name название
+ * @param {string} url ссылка
+ * @param {boolean} insertToEnd - вставка в конец, по умолчанию втавка в начало
+ */
+function addCard(name, url, insertToEnd = true) {
   const card = cardTemplate.cloneNode(true);
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
-  image.setAttribute('src', item.link);
-  image.setAttribute('alt', item.name);
-  text.insertAdjacentText('afterbegin', item.name);
-  elements.insertAdjacentElement('beforeend', card);
-});
+  image.setAttribute('src', url);
+  image.setAttribute('alt', name);
+  text.append(document.createTextNode(name));
+  if (insertToEnd) {
+    elements.append(card);
+  } else {
+    elements.prepend(card);
+  }
+}
+
+
 
 //Вешаем обработчики
-const popups = document.querySelectorAll('.popup');
-popups.forEach(function (popup) {
-  popup.querySelector('.popup__close-button').addEventListener(
-    'click',
-    (evt) => { togglePopup(evt.target.closest('.popup')); }
-  );
-
-  if (popup.classList.contains('popup_edit')) {
-    popup.querySelector('.popup__button').addEventListener('click', saveProfile);
-  } else if (popup.classList.contains('popup_add')) {
-    popup.querySelector('.popup__button').addEventListener('click', addPlace);
-  }
-
+profileEditButton.addEventListener('click', showEditProfile);
+profileAddButton.addEventListener('click', showAddPlace);
+popupEdit.addEventListener('submit', saveProfile);
+popupAdd.addEventListener('submit', addPlace);
+document.querySelectorAll('.popup__close-button').forEach(function (closeBtn) {
+  closeBtn.addEventListener('click', (evt) => { togglePopup(evt.target.closest('.popup')); });
 });
 
-
-// Показ - скрытие модального окна
+// Закрытие попапа
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
 }
 
 // Редактирование профиля
 function showEditProfile() {
-  const popup = document.querySelector('.popup_edit');
-  popup.querySelector('[name="name"]').value = profileName.textContent;
-  popup.querySelector('[name="description"]').value = profileDescription.textContent;
-  togglePopup(popup);
+  popupEditName.value = profileName.textContent;
+  popupEditDesctiption.value = profileDescription.textContent;
+  togglePopup(popupEdit);
 }
 
 // Сохранение профиля
 function saveProfile(evt) {
   evt.preventDefault();
-  const formFields = evt.target.closest('.popup__fields');
-  profileName.textContent = formFields.querySelector('[name="name"]').value;
-  profileDescription.textContent = formFields.querySelector('[name="description"]').value;
-  togglePopup(formFields.closest('.popup'));
+  profileName.textContent = popupEditName.value;
+  profileDescription.textContent = popupEditDesctiption.value;
+  togglePopup(popupEdit);
 }
 
 // Форма добавления нового места
 function showAddPlace() {
-  const popup = document.querySelector('.popup_add');
-  popup.querySelector('[name="place"]').value = '';
-  popup.querySelector('[name="url"]').value = '';
-  togglePopup(popup);
+  popupAddPlace.value = '';
+  popupAddUrl.value = '';
+  togglePopup(popupAdd);
 }
 
 // Добавление новогоо места
 function addPlace(evt) {
   evt.preventDefault();
-  console.log('addPlaace');
+  addCard(popupAddPlace.value, popupAddUrl.value, false);
+  togglePopup(popupAdd);
 }
 
-// Вешаем обработчики событий на кнопки
 
 
