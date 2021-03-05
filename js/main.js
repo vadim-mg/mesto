@@ -15,6 +15,7 @@ const popupEditName = popupEdit.querySelector('[name="name"]');
 const popupEditDesctiption = popupEdit.querySelector('[name="description"]');
 
 const popupAdd = document.querySelector('.popup_add');
+const popupView = document.querySelector('.popup_view');
 
 
 //Выводим все карточки
@@ -74,7 +75,11 @@ function addCard(item, insertToEnd = true) {
   }
   // вешаем смену стилей на лайк
   elementLike.addEventListener('click', (evt) => { evt.target.classList.toggle('element__like_active') });
+  // вешаем удаление на иконку корзины
   elementBin.addEventListener('click', (evt) => { evt.target.closest('.element').remove(); });
+  // вешаем открытие попапа с изображение по клику
+  image.addEventListener('click', showPopupViewPicture);
+
 }
 
 /**
@@ -128,6 +133,17 @@ function saveCard(evt) {
   togglePopup(popupAdd);
   popupAddPlace.value = '';
   popupAddUrl.value = '';
+}
+
+function showPopupViewPicture(evt){
+  const image=evt.target.getAttribute('src');
+  const name=evt.target.getAttribute('alt');
+  const popupImage = popupView.querySelector('.popup__picture-image');
+  const popupName = popupView.querySelector('.popup__picture-name');
+  popupImage.setAttribute('src', image);
+  popupImage.setAttribute('alt', name);
+  popupName.textContent = name;
+  togglePopup(popupView);
 }
 
 

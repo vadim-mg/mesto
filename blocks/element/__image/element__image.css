@@ -6,3 +6,7 @@
   object-position: top;
   background-color: gray;
 }
+
+.element__image:hover {
+  cursor: pointer;
+}
