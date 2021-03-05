@@ -29,6 +29,7 @@
 /*  */
 
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__bin/element__bin.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__text/element__text.css);

@@ -63,6 +63,7 @@ function addCard(item, insertToEnd = true) {
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
   const elementLike = card.querySelector('.element__like');
+  const elementBin = card.querySelector('.element__bin');
   image.setAttribute('src', item.link);
   image.setAttribute('alt', item.name);
   text.textContent = item.name;
@@ -73,6 +74,7 @@ function addCard(item, insertToEnd = true) {
   }
   // вешаем смену стилей на лайк
   elementLike.addEventListener('click', (evt) => { evt.target.classList.toggle('element__like_active') });
+  elementBin.addEventListener('click', (evt) => { evt.target.closest('.element').remove(); });
 }
 
 /**
