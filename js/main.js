@@ -1,30 +1,4 @@
-// Карточки, которые будут загружены на страницу
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 
 // Выбираем все нужные элементы
 const profileInfo = document.querySelector('.profile__info');
@@ -44,10 +18,38 @@ const popupAdd = document.querySelector('.popup_add');
 
 
 //Выводим все карточки
-initialCards.forEach(function (item) {
-  addCard(item, true);
-});
-
+function renderList() {
+  // Карточки, которые будут загружены на страницу
+  const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+  initialCards.forEach(function (item) {
+    addCard(item, true);
+  });
+}
 
 /**
  *  Вывод карточки в область elements
@@ -70,17 +72,18 @@ function addCard(item, insertToEnd = true) {
   }
 }
 
-
 /**
  * Вешаем обработчики
  */
-profileEditButton.addEventListener('click', showEditProfile);
-profileAddButton.addEventListener('click', () => { togglePopup(popupAdd); });
-popupEdit.addEventListener('submit', saveProfile);
-popupAdd.addEventListener('submit', saveCard);
-document.querySelectorAll('.popup__close-button').forEach(function (closeBtn) {
-  closeBtn.addEventListener('click', (evt) => { togglePopup(evt.target.closest('.popup')); });
-});
+function addEventListeners() {
+  profileEditButton.addEventListener('click', showEditProfile);
+  profileAddButton.addEventListener('click', () => { togglePopup(popupAdd); });
+  popupEdit.addEventListener('submit', saveProfile);
+  popupAdd.addEventListener('submit', saveCard);
+  document.querySelectorAll('.popup__close-button').forEach(function (closeBtn) {
+    closeBtn.addEventListener('click', (evt) => { togglePopup(evt.target.closest('.popup')); });
+  });
+}
 
 /**
  *  Закрытие/открытие попапа
@@ -123,6 +126,5 @@ function saveCard(evt) {
 }
 
 
-
-
-
+renderList();
+addEventListeners();
