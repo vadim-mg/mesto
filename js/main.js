@@ -62,6 +62,7 @@ function addCard(item, insertToEnd = true) {
   const card = cardTemplate.cloneNode(true);
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
+  const elementLike = card.querySelector('.element__like');
   image.setAttribute('src', item.link);
   image.setAttribute('alt', item.name);
   text.textContent = item.name;
@@ -70,6 +71,8 @@ function addCard(item, insertToEnd = true) {
   } else {
     elements.prepend(card);
   }
+  // вешаем смену стилей на лайк
+  elementLike.addEventListener('click', (evt) => { evt.target.classList.toggle('element__like_active') });
 }
 
 /**
