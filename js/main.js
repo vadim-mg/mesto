@@ -39,16 +39,13 @@ const cardTemplate = elements.querySelector('#card-template').content.querySelec
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditName = popupEdit.querySelector('[name="name"]');
 const popupEditDesctiption = popupEdit.querySelector('[name="description"]');
-const popupEditButton = popupEdit.querySelector('.popup__button');
 
 const popupAdd = document.querySelector('.popup_add');
-const popupAddPlace = popupAdd.querySelector('[name="place"]');
-const popupAddUrl = popupAdd.querySelector('[name="url"]');
-const popupAddButton = popupAdd.querySelector('.popup__button');
+
 
 //Выводим все карточки
 initialCards.forEach(function (item) {
-  addCard(item.name, item.link, true);
+  addCard(item, true);
 });
 
 
@@ -59,13 +56,13 @@ initialCards.forEach(function (item) {
  * @param {string} url ссылка
  * @param {boolean} insertToEnd - вставка в конец, по умолчанию втавка в начало
  */
-function addCard(name, url, insertToEnd = true) {
+function addCard(item, insertToEnd = true) {
   const card = cardTemplate.cloneNode(true);
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
-  image.setAttribute('src', url);
-  image.setAttribute('alt', name);
-  text.append(document.createTextNode(name));
+  image.setAttribute('src', item.link);
+  image.setAttribute('alt', item.name);
+  text.textContent = item.name;
   if (insertToEnd) {
     elements.append(card);
   } else {
@@ -74,29 +71,37 @@ function addCard(name, url, insertToEnd = true) {
 }
 
 
-
-//Вешаем обработчики
+/**
+ * Вешаем обработчики
+ */
 profileEditButton.addEventListener('click', showEditProfile);
-profileAddButton.addEventListener('click', showAddPlace);
+profileAddButton.addEventListener('click', () => { togglePopup(popupAdd); });
 popupEdit.addEventListener('submit', saveProfile);
-popupAdd.addEventListener('submit', addPlace);
+popupAdd.addEventListener('submit', saveCard);
 document.querySelectorAll('.popup__close-button').forEach(function (closeBtn) {
   closeBtn.addEventListener('click', (evt) => { togglePopup(evt.target.closest('.popup')); });
 });
 
-// Закрытие попапа
+/**
+ *  Закрытие/открытие попапа
+ * @param {Node} popup - объект попапа
+ */
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
 }
 
-// Редактирование профиля
+/**
+ * Показ формы редактирования профиля
+ */
 function showEditProfile() {
   popupEditName.value = profileName.textContent;
   popupEditDesctiption.value = profileDescription.textContent;
   togglePopup(popupEdit);
 }
 
-// Сохранение профиля
+/**
+ * Сохранение профиля
+ */
 function saveProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupEditName.value;
@@ -104,19 +109,20 @@ function saveProfile(evt) {
   togglePopup(popupEdit);
 }
 
-// Форма добавления нового места
-function showAddPlace() {
+/**
+ * Добавление карточки
+ */
+function saveCard(evt) {
+  evt.preventDefault();
+  const popupAddPlace = popupAdd.querySelector('[name="place"]');
+  const popupAddUrl = popupAdd.querySelector('[name="url"]');
+  addCard({ name: popupAddPlace.value, link: popupAddUrl.value }, false);
+  togglePopup(popupAdd);
   popupAddPlace.value = '';
   popupAddUrl.value = '';
-  togglePopup(popupAdd);
 }
 
-// Добавление новогоо места
-function addPlace(evt) {
-  evt.preventDefault();
-  addCard(popupAddPlace.value, popupAddUrl.value, false);
-  togglePopup(popupAdd);
-}
+
 
 
 
