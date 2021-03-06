@@ -16,12 +16,6 @@
   transition: 0.3s;
 }
 
-.element__like:active {
-  background: url(../../../images/element/like_active.svg);
-  border: 0;
-  opacity: 1;
-}
-
 .element__like:focus {
   outline: 0;
 }
