@@ -4,18 +4,16 @@
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileDescription = profileInfo.querySelector('.profile__description');
-const profileEditButton = profileInfo.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
 
-const elements = document.querySelector('.elements');
-const cardTemplate = elements.querySelector('#card-template').content.querySelector('.element');
+const elementsBlock = document.querySelector('.elements');
+const cardTemplate = elementsBlock.querySelector('#card-template').content.querySelector('.element');
 
-const popupEdit = document.querySelector('.popup_edit');
-const popupEditName = popupEdit.querySelector('[name="name"]');
-const popupEditDesctiption = popupEdit.querySelector('[name="description"]');
+const popupEditProfile = document.querySelector('.popup_edit');
+const profileNameField = popupEditProfile.querySelector('[name="name"]');
+const profileDescriptionField = popupEditProfile.querySelector('[name="description"]');
 
-const popupAdd = document.querySelector('.popup_add');
-const popupView = document.querySelector('.popup_view');
+const popupAddForm = document.querySelector('.popup_add');
+const popupViewForm = document.querySelector('.popup_view');
 
 
 //Выводим все карточки
@@ -53,7 +51,7 @@ function renderList() {
 }
 
 /**
- *  Вывод карточки в область elements
+ *  Вывод карточки в область elementsBlock
  *
  * @param {string} name название
  * @param {string} url ссылка
@@ -63,53 +61,66 @@ function addCard(item, insertToEnd = true) {
   const card = cardTemplate.cloneNode(true);
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
-  const elementLike = card.querySelector('.element__like');
-  const elementBin = card.querySelector('.element__bin');
+  const LikeBtn = card.querySelector('.element__like');
+  const BinBtn = card.querySelector('.element__bin');
   image.setAttribute('src', item.link);
   image.setAttribute('alt', item.name);
   text.textContent = item.name;
   if (insertToEnd) {
-    elements.append(card);
+    elementsBlock.append(card);
   } else {
-    elements.prepend(card);
+    elementsBlock.prepend(card);
   }
   // вешаем смену стилей на лайк
-  elementLike.addEventListener('click', (evt) => { evt.target.classList.toggle('element__like_active') });
+  LikeBtn.addEventListener('click', (evt) => { evt.target.classList.toggle('element__like_active') });
   // вешаем удаление на иконку корзины
-  elementBin.addEventListener('click', (evt) => { evt.target.closest('.element').remove(); });
+  BinBtn.addEventListener('click', (evt) => { evt.target.closest('.element').remove(); });
   // вешаем открытие попапа с изображение по клику
   image.addEventListener('click', showPopupViewPicture);
-
 }
 
 /**
  * Вешаем обработчики
  */
 function addEventListeners() {
+  const profileEditButton = profileInfo.querySelector('.profile__edit-button');
+  const profileAddButton = document.querySelector('.profile__add-button');
+
   profileEditButton.addEventListener('click', showEditProfile);
-  profileAddButton.addEventListener('click', () => { togglePopup(popupAdd); });
-  popupEdit.addEventListener('submit', saveProfile);
-  popupAdd.addEventListener('submit', saveCard);
+  profileAddButton.addEventListener('click', () => { openPopup(popupAddForm); });
+  popupEditProfile.addEventListener('submit', saveProfile);
+  popupAddForm.addEventListener('submit', saveCard);
+  // закрытие попапов по кликам на крестик
   document.querySelectorAll('.popup__close-button').forEach(function (closeBtn) {
-    closeBtn.addEventListener('click', (evt) => { togglePopup(evt.target.closest('.popup')); });
+    closeBtn.addEventListener('click', (evt) => { closePopup(evt.target.closest('.popup')); });
   });
 }
 
 /**
- *  Закрытие/открытие попапа
- * @param {Node} popup - объект попапа
+ * открытие попапа popup
  */
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+/**
+ * закрытие попапа popup
+ */
+function closePopup(popup) {
+  /* класс popup_hide-animation плавно меняет прозарчность до нуля */
+  popup.classList.add('popup_hide-animation');
+  popup.classList.remove('popup_opened');
+  /* удаляем popup_hide-animation после того как закончится анимация */
+  setTimeout(() => popup.classList.remove('popup_hide-animation'), 1000);
 }
 
 /**
  * Показ формы редактирования профиля
  */
 function showEditProfile() {
-  popupEditName.value = profileName.textContent;
-  popupEditDesctiption.value = profileDescription.textContent;
-  togglePopup(popupEdit);
+  profileNameField.value = profileName.textContent;
+  profileDescriptionField.value = profileDescription.textContent;
+  openPopup(popupEditProfile);
 }
 
 /**
@@ -117,9 +128,9 @@ function showEditProfile() {
  */
 function saveProfile(evt) {
   evt.preventDefault();
-  profileName.textContent = popupEditName.value;
-  profileDescription.textContent = popupEditDesctiption.value;
-  togglePopup(popupEdit);
+  profileName.textContent = profileNameField.value;
+  profileDescription.textContent = profileDescriptionField.value;
+  closePopup(popupEditProfile);
 }
 
 /**
@@ -127,23 +138,26 @@ function saveProfile(evt) {
  */
 function saveCard(evt) {
   evt.preventDefault();
-  const popupAddPlace = popupAdd.querySelector('[name="place"]');
-  const popupAddUrl = popupAdd.querySelector('[name="url"]');
+  const popupAddPlace = popupAddForm.querySelector('[name="place"]');
+  const popupAddUrl = popupAddForm.querySelector('[name="url"]');
   addCard({ name: popupAddPlace.value, link: popupAddUrl.value }, false);
-  togglePopup(popupAdd);
+  closePopup(popupAddForm);
   popupAddPlace.value = '';
   popupAddUrl.value = '';
 }
 
-function showPopupViewPicture(evt){
-  const image=evt.target.getAttribute('src');
-  const name=evt.target.getAttribute('alt');
-  const popupImage = popupView.querySelector('.popup__picture-image');
-  const popupName = popupView.querySelector('.popup__picture-name');
+/**
+ * Показыаем карточку на весь экран
+  */
+function showPopupViewPicture(evt) {
+  const image = evt.target.getAttribute('src');
+  const name = evt.target.getAttribute('alt');
+  const popupImage = popupViewForm.querySelector('.popup__picture-image');
+  const popupName = popupViewForm.querySelector('.popup__picture-name');
   popupImage.setAttribute('src', image);
   popupImage.setAttribute('alt', name);
   popupName.textContent = name;
-  togglePopup(popupView);
+  openPopup(popupViewForm);
 }
 
 
