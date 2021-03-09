@@ -41,8 +41,8 @@ function createCard(item) {
   const card = cardTemplate.cloneNode(true);
   const image = card.querySelector('.element__image');
   const text = card.querySelector('.element__text');
-  const likeBtn = card.querySelector('.element__like');
-  const binBtn = card.querySelector('.element__bin');
+  const likeButton = card.querySelector('.element__like');
+  const binButton = card.querySelector('.element__bin');
 
   // заполняем карточку
   image.src = item.link;
@@ -50,8 +50,8 @@ function createCard(item) {
   text.textContent = item.name;
 
   // вешаем обработчики
-  likeBtn.addEventListener('click', handleLikeIcon);
-  binBtn.addEventListener('click', handleDeleteCard);
+  likeButton.addEventListener('click', handleLikeIcon);
+  binButton.addEventListener('click', handleDeleteCard);
   image.addEventListener('click', () => showPopupViewPicture(item));
 
   return card;

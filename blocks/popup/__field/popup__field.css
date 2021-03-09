@@ -7,6 +7,26 @@
   margin-top: 24px;
 }
 
-.popup__field:first-of-type{
+.popup__field::-webkit-input-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__field::-moz-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__field:-ms-input-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__field::-ms-input-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__field::placeholder {
+  color: #C4C4C4;
+}
+
+.popup__field:first-of-type {
   margin-top: 0;
 }
