@@ -48,9 +48,16 @@
       <button class="popup__close-button" type="button" aria-label="close_popup"></button>
       <fieldset class="popup__fields">
         <legend class="popup__caption">Редактировать профиль</legend>
-        <input type="text" class="popup__field" name="name" value="">
-        <input type="text" class="popup__field" name="description" value="">
-        <button type="submit" class="popup__button">Сохранить</button>
+        <label class="popup__field">
+          <input type="text" class="popup__input" name="name" value="" required minlength="2" maxlength="40"
+                 placeholder="Имя">
+          <span class="popup__field-error">test</span>
+        </label>
+        <label class="popup__field">
+          <input type="text" class="popup__input" name="description" value="" required minlength="2" maxlength="200" placeholder="О себе">
+          <span class="popup__field-error">test</span>
+        </label>
+        <button type="submit" class="popup__button popup__button_disabled">Сохранить</button>
       </fieldset>
     </form>
   </div>
@@ -60,9 +67,15 @@
       <button class="popup__close-button" type="button" aria-label="close_popup"></button>
       <fieldset class="popup__fields">
         <legend class="popup__caption">Новое место</legend>
-        <input type="text" class="popup__field" name="place" value="" placeholder="Название">
-        <input type="text" class="popup__field" name="url" value="" placeholder="Ссылка на картинку">
-        <button type="submit" class="popup__button">Создать</button>
+        <label class="popup__field">
+          <input type="text" class="popup__input" name="place" value="" required minlength="2" maxlength="30"  placeholder="Название">
+          <span class="popup__field-error">test</span>
+        </label>
+        <label class="popup__field">
+          <input type="url" class="popup__input" name="url" value="" required placeholder="Ссылка на картинку">
+          <span class="popup__field-error">test</span>
+        </label>
+        <button type="submit" class="popup__button">Сохранить</button>
       </fieldset>
     </form>
   </div>

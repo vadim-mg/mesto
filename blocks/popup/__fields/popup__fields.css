@@ -2,6 +2,7 @@
   padding: 0;
   border: 0;
   display: grid;
+  gap: 13px;
   min-inline-size: auto;
   overflow: hidden;
   width: 100%;

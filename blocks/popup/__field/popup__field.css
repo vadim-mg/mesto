@@ -1,32 +1,4 @@
-.popup__field {
-  font-size: 14px;
-  line-height: 17px;
-  border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 8px 0;
-  margin-top: 24px;
-}
-
-.popup__field::-webkit-input-placeholder {
-  color: #C4C4C4;
-}
-
-.popup__field::-moz-placeholder {
-  color: #C4C4C4;
-}
-
-.popup__field:-ms-input-placeholder {
-  color: #C4C4C4;
-}
-
-.popup__field::-ms-input-placeholder {
-  color: #C4C4C4;
-}
-
-.popup__field::placeholder {
-  color: #C4C4C4;
-}
-
-.popup__field:first-of-type {
-  margin-top: 0;
+.popup__field{
+  height: 44px;
+  position: relative;
 }
