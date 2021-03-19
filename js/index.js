@@ -96,6 +96,7 @@ function addEventListeners() {
  * открытие попапа popup
  */
 function openPopup(popup) {
+  validatePopup(popup, validationParams);
   popup.classList.add('popup_opened');
 }
 
@@ -119,7 +120,6 @@ function showEditProfile() {
  * Сохранение профиля
  */
 function saveProfile(evt) {
-  evt.preventDefault();
   profileName.textContent = profileNameField.value;
   profileDescription.textContent = profileDescriptionField.value;
   closePopup(popupEditProfile);
@@ -129,10 +129,9 @@ function saveProfile(evt) {
  * Добавление карточки
  */
 function saveCard(evt) {
-  evt.preventDefault();
   renderCard({ name: popupAddPlace.value, link: popupAddUrl.value }, elementsBlock);
   closePopup(popupAddNewPlace);
-  popupAddNewPlaceForm.reset();
+  setTimeout(() => popupAddNewPlaceForm.reset(), 500); //очищаем форму с задержкой, после скрытия
 }
 
 /**

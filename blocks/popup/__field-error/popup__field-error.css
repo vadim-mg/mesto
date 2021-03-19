@@ -6,11 +6,11 @@
   font-size: 12px;
   line-height: 15px;
   display: none;
-  position: absolute;
-  top: 33px;
+  transform: translateY(-1px);
   box-sizing: border-box;
 }
 
-.popup__input:invalid+.popup__field-error {
+/* .popup__input:invalid+.popup__field-error { */
+input:invalid+.popup__field-error {
   display: block;
 }

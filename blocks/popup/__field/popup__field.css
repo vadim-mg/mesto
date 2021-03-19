@@ -1,4 +1,4 @@
 .popup__field{
-  height: 44px;
+  min-height: 44px;
   position: relative;
 }

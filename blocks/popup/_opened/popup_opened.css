@@ -3,5 +3,5 @@
   display: flex;
   opacity: 1;
   visibility: visible;
-  transition: visibility 0s, opacity 1s;
+  transition: visibility 0s, opacity 0.5s;
 }
