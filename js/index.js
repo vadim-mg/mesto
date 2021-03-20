@@ -96,7 +96,7 @@ function addEventListeners() {
  * открытие попапа popup
  */
 function openPopup(popup) {
-  validatePopup(popup, validationParams);
+  validatePreOpenPopup(popup, validationParams);
   popup.classList.add('popup_opened');
 }
 

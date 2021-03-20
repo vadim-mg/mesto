@@ -52,7 +52,7 @@
 @import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__field-error/popup__field-error.css);
+@import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__button/popup__button.css);
 @import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
 @import url(../blocks/popup/__picture/popup__picture.css);

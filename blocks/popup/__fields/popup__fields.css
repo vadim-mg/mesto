@@ -4,7 +4,6 @@
   display: grid;
   grid-template-rows: minmax(37px, auto) minmax(53px, auto) minmax(53px, auto) 1fr;
   gap: 4px;
-  /* min-inline-size: auto; */
   overflow: hidden;
   width: 100%;
 }

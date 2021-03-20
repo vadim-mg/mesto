@@ -1,4 +1,4 @@
-.popup__field-error {
+.popup__error {
   width: 100%;
   padding-top: 4px;
   border-top: 1px solid #FF0000;
@@ -10,7 +10,6 @@
   box-sizing: border-box;
 }
 
-/* .popup__input:invalid+.popup__field-error { */
-input:invalid+.popup__field-error {
+input:invalid+.popup__error {
   display: block;
 }
