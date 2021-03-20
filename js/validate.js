@@ -9,6 +9,7 @@ const validationParams = {
   inactiveButtonClass: 'popup__button_disabled',
 };
 
+
 /**
  * Вставляет текст ошибки {string} в элемент для вывода ошибок {fieldError}
  * @param {node} fieldError
@@ -18,6 +19,7 @@ const setFieldError = (fieldError, errorMessage) => {
   fieldError.textContent = errorMessage;
 }
 
+
 /**
  * Возвращает true если есть хоть один невалидный input
  * @param {node} inputList - список полей
@@ -26,6 +28,7 @@ const setFieldError = (fieldError, errorMessage) => {
 const hasErrorField = (inputList) => {
   return Array.from(inputList).some(input => !input.validity.valid);
 }
+
 
 /**
  * Переключает состояние кнопки button в зависимости от наличия ошибок валидации
@@ -44,6 +47,7 @@ const toggleButtonState = (button, inactiveSelector, inputList) => {
   }
 }
 
+
 /**
  * Приведени вида формы в порядок перед открытием
  * (установка правильных ошибок валидации и состояния кнопки)
@@ -52,12 +56,16 @@ const toggleButtonState = (button, inactiveSelector, inputList) => {
  */
 const validatePreOpenPopup = (popup, validationParams) => {
   const form = popup.querySelector(validationParams.formSelector);
-  const inputList = form.querySelectorAll(validationParams.inputSelector);
-  const button = form.querySelector(validationParams.submitButtonSelector);
+  // Если попап содержит форму, то выполняем приведение формы в порядок
+  if (form) {
+    const inputList = form.querySelectorAll(validationParams.inputSelector);
+    const button = form.querySelector(validationParams.submitButtonSelector);
 
-  inputList.forEach(input => checkInputValidity(input, validationParams.errorSelector));
-  toggleButtonState(button, validationParams.inactiveButtonClass, inputList);
+    inputList.forEach(input => checkInputValidity(input, validationParams.errorSelector));
+    toggleButtonState(button, validationParams.inactiveButtonClass, inputList);
+  }
 }
+
 
 /**
  * Помещает браузурный текст ошибки при валидации поля input
@@ -71,6 +79,7 @@ const checkInputValidity = (input, errorSelector) => {
 
   setFieldError(error, (!input.validity.valid ? input.validationMessage : ''));
 }
+
 
 /**
  * Вешаем обработчики на все элементы
@@ -88,6 +97,7 @@ const setFormEventListeners = (form, validationParams) => {
     input.addEventListener('input', () => checkInputValidity(input, validationParams.errorSelector)));
 }
 
+
 /**
  * включение валидации в форме
  * @param {object} validationParams
@@ -99,6 +109,6 @@ const enableValidation = (validationParams) => {
 }
 
 
-enableValidation(validationParams);
+
 
 

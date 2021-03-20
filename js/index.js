@@ -22,6 +22,7 @@ const popupImage = popupViewForm.querySelector('.popup__picture-image');
 const popupName = popupViewForm.querySelector('.popup__picture-name');
 
 const closeButtons = document.querySelectorAll('.popup__close-button');
+const popups = document.querySelectorAll('.popup');
 
 
 /**
@@ -88,8 +89,17 @@ function addEventListeners() {
   profileAddButton.addEventListener('click', () => openPopup(popupAddNewPlace));
   popupEditProfile.addEventListener('submit', saveProfile);
   popupAddNewPlace.addEventListener('submit', saveCard);
-  // закрытие попапов по кликам на крестик
-  closeButtons.forEach((closeBtn) => closeBtn.addEventListener('click', (evt) => closePopup(evt.target.closest('.popup'))));
+
+  // закрытие всех попапов по ESC
+  document.addEventListener('keydown', evt =>
+    (evt.key === "Escape") ? popups.forEach(popup => closePopup(popup)) : '');
+
+  // закрытие попапов по клику на оверлей, крестику
+  popups.forEach((popup) => {
+    popup.addEventListener('click', evt =>
+      (evt.target === popup) || evt.target.classList.contains('popup__close-button')
+        ? closePopup(popup) : '');
+  });
 }
 
 /**
@@ -145,5 +155,6 @@ function showPopupViewPicture(item) {
 }
 
 
+enableValidation(validationParams);
 renderList();
 addEventListeners();
