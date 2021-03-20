@@ -90,10 +90,6 @@ function addEventListeners() {
   popupEditProfile.addEventListener('submit', saveProfile);
   popupAddNewPlace.addEventListener('submit', saveCard);
 
-  // закрытие всех попапов по ESC
-  document.addEventListener('keydown', evt =>
-    (evt.key === "Escape") ? popups.forEach(popup => closePopup(popup)) : '');
-
   // закрытие попапов по клику на оверлей, крестику
   popups.forEach((popup) => {
     popup.addEventListener('click', evt =>
@@ -108,13 +104,27 @@ function addEventListeners() {
 function openPopup(popup) {
   validatePreOpenPopup(popup, validationParams);
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', escEventLestener);
 }
 
 /**
  * закрытие попапа popup
  */
 function closePopup(popup) {
+  document.removeEventListener('keydown', escEventLestener);
   popup.classList.remove('popup_opened');
+}
+
+/**
+ * закрытие попапов по ESC
+ * @param {event} evt
+ */
+const escEventLestener = (evt) => {
+  if (evt.key === "Escape") {
+    // если был нажат ESC, то находим открытый попап && закрываем его
+    Array.from(popups)
+      .some(popup => popup.classList.contains('popup_opened') && closePopup(popup));
+  }
 }
 
 /**

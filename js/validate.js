@@ -60,7 +60,6 @@ const validatePreOpenPopup = (popup, validationParams) => {
   if (form) {
     const inputList = form.querySelectorAll(validationParams.inputSelector);
     const button = form.querySelector(validationParams.submitButtonSelector);
-
     inputList.forEach(input => checkInputValidity(input, validationParams.errorSelector));
     toggleButtonState(button, validationParams.inactiveButtonClass, inputList);
   }
@@ -76,7 +75,6 @@ const validatePreOpenPopup = (popup, validationParams) => {
  */
 const checkInputValidity = (input, errorSelector) => {
   const error = input.parentElement.querySelector(errorSelector);
-
   setFieldError(error, (!input.validity.valid ? input.validationMessage : ''));
 }
 
@@ -89,10 +87,8 @@ const checkInputValidity = (input, errorSelector) => {
 const setFormEventListeners = (form, validationParams) => {
   const inputList = form.querySelectorAll(validationParams.inputSelector);
   const button = form.querySelector(validationParams.submitButtonSelector);
-
   form.addEventListener('submit', evt => evt.preventDefault());
-  form.addEventListener('input', () =>
-    toggleButtonState(button, validationParams.inactiveButtonClass, inputList));
+  form.addEventListener('input', () => toggleButtonState(button, validationParams.inactiveButtonClass, inputList));
   inputList.forEach(input =>
     input.addEventListener('input', () => checkInputValidity(input, validationParams.errorSelector)));
 }
@@ -104,8 +100,8 @@ const setFormEventListeners = (form, validationParams) => {
  */
 const enableValidation = (validationParams) => {
   const formList = document.querySelectorAll(validationParams.formSelector);
-
-  formList.forEach(form => setFormEventListeners(form, validationParams));
+  formList.forEach(form =>
+    setFormEventListeners(form, validationParams));
 }
 
 
