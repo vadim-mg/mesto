@@ -1,15 +1,15 @@
 .popup__error {
+  display: block;
   width: 100%;
   padding-top: 4px;
-  border-top: 1px solid #FF0000;
   color: #FF0000;
   font-size: 12px;
   line-height: 15px;
-  display: none;
   transform: translateY(-1px);
   box-sizing: border-box;
+  width: 100%;
 }
 
 input:invalid+.popup__error {
-  display: block;
+  border-top: 1px solid #FF0000;
 }
