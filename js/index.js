@@ -25,6 +25,7 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
 
+
 /**
  * Выводим все карточки
  */
@@ -92,9 +93,11 @@ function addEventListeners() {
 
   // закрытие попапов по клику на оверлей, крестику
   popups.forEach((popup) => {
-    popup.addEventListener('click', evt =>
-      (evt.target === popup) || evt.target.classList.contains('popup__close-button')
-        ? closePopup(popup) : '');
+    popup.addEventListener('click', (evt) => {
+      if ((evt.target === popup) || evt.target.classList.contains('popup__close-button')) {
+        closePopup(popup);
+      }
+    });
   });
 }
 
@@ -121,9 +124,8 @@ function closePopup(popup) {
  */
 const escEventLestener = (evt) => {
   if (evt.key === "Escape") {
-    // если был нажат ESC, то находим открытый попап && закрываем его
-    Array.from(popups)
-      .some(popup => popup.classList.contains('popup_opened') && closePopup(popup));
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
   }
 }
 
@@ -151,7 +153,7 @@ function saveProfile(evt) {
 function saveCard(evt) {
   renderCard({ name: popupAddPlace.value, link: popupAddUrl.value }, elementsBlock);
   closePopup(popupAddNewPlace);
-  setTimeout(() => popupAddNewPlaceForm.reset(), 500); //очищаем форму с задержкой, после скрытия
+  popupAddNewPlaceForm.reset();
 }
 
 /**
