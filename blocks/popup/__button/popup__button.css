@@ -7,6 +7,7 @@
   margin-top: 45px;
   border-radius: 2px;
   border: 0;
+  width: 100%;
 }
 
 .popup__button:hover {

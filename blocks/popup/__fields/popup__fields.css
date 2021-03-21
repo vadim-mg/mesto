@@ -1,9 +1,6 @@
 .popup__fields {
   padding: 0;
   border: 0;
-  display: grid;
-  grid-template-rows: minmax(37px, auto) minmax(53px, auto) minmax(53px, auto) 1fr;
-  gap: 4px;
   overflow: hidden;
   width: 100%;
 }
