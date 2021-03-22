@@ -60,7 +60,6 @@ const validatePreOpenPopup = (popup, validationParams) => {
   if (form) {
     const inputList = form.querySelectorAll(validationParams.inputSelector);
     const button = form.querySelector(validationParams.submitButtonSelector);
-    inputList.forEach(input => checkInputValidity(input, validationParams.errorSelector));
     toggleButtonState(button, validationParams.inactiveButtonClass, inputList);
   }
 }
@@ -103,6 +102,7 @@ const enableValidation = (validationParams) => {
   formList.forEach(form =>
     setFormEventListeners(form, validationParams));
 }
+
 
 
 
