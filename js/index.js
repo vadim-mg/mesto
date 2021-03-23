@@ -21,7 +21,6 @@ const popupViewForm = document.querySelector('.popup_view');
 const popupImage = popupViewForm.querySelector('.popup__picture-image');
 const popupName = popupViewForm.querySelector('.popup__picture-name');
 
-const closeButtons = document.querySelectorAll('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
 
@@ -37,7 +36,7 @@ function renderList() {
 
 /**
  *  Возвращает DOM элемент вновь созданной карточки
- * @param {string:name,string:link} item - объект карточки
+ * @param {Object} item - объект карточки
  */
 function createCard(item) {
   const card = cardTemplate.cloneNode(true);
@@ -61,8 +60,8 @@ function createCard(item) {
 
 /**
  * Добавление карточки data в разметку в начало элемента wrap
- * @param {node} data
- * @param {node} wrap
+ * @param {object} data
+ * @param {ParentNode} wrap
  */
 function renderCard(data, wrap) {
   wrap.prepend(createCard(data));
@@ -107,22 +106,22 @@ function addEventListeners() {
 function openPopup(popup) {
   validatePreOpenPopup(popup, validationParams);
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', escEventLestener);
+  document.addEventListener('keydown', escEventListener);
 }
 
 /**
  * закрытие попапа popup
  */
 function closePopup(popup) {
-  document.removeEventListener('keydown', escEventLestener);
+  document.removeEventListener('keydown', escEventListener);
   popup.classList.remove('popup_opened');
 }
 
 /**
  * закрытие попапов по ESC
- * @param {event} evt
+ * @param {KeyboardEvent} evt
  */
-const escEventLestener = (evt) => {
+const escEventListener = (evt) => {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
@@ -141,7 +140,7 @@ function showEditProfile() {
 /**
  * Сохранение профиля
  */
-function saveProfile(evt) {
+function saveProfile() {
   profileName.textContent = profileNameField.value;
   profileDescription.textContent = profileDescriptionField.value;
   closePopup(popupEditProfile);
@@ -150,7 +149,7 @@ function saveProfile(evt) {
 /**
  * Добавление карточки
  */
-function saveCard(evt) {
+function saveCard() {
   renderCard({ name: popupAddPlace.value, link: popupAddUrl.value }, elementsBlock);
   closePopup(popupAddNewPlace);
   popupAddNewPlaceForm.reset();
