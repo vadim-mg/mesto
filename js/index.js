@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 // Выбираем все нужные элементы
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
@@ -6,7 +8,7 @@ const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 const elementsBlock = document.querySelector('.elements');
-const cardTemplate = elementsBlock.querySelector('#card-template').content.querySelector('.element');
+
 
 const popupEditProfile = document.querySelector('.popup_edit');
 const profileNameField = popupEditProfile.querySelector('[name="name"]');
@@ -24,62 +26,26 @@ const popupName = popupViewForm.querySelector('.popup__picture-name');
 const popups = document.querySelectorAll('.popup');
 
 
-
 /**
  * Выводим все карточки
  */
 function renderList() {
   initialCards.forEach(function (item) {
-    renderCard(item, elementsBlock);
+    const card = new Card(item, '#card-template');
+    renderCard(card.getCard(), elementsBlock);
   });
 }
 
-/**
- *  Возвращает DOM элемент вновь созданной карточки
- * @param {Object} item - объект карточки
- */
-function createCard(item) {
-  const card = cardTemplate.cloneNode(true);
-  const image = card.querySelector('.element__image');
-  const text = card.querySelector('.element__text');
-  const likeButton = card.querySelector('.element__like');
-  const binButton = card.querySelector('.element__bin');
-
-  // заполняем карточку
-  image.src = item.link;
-  image.alt = item.name;
-  text.textContent = item.name;
-
-  // вешаем обработчики
-  likeButton.addEventListener('click', handleLikeIcon);
-  binButton.addEventListener('click', handleDeleteCard);
-  image.addEventListener('click', () => showPopupViewPicture(item));
-
-  return card;
-}
 
 /**
  * Добавление карточки data в разметку в начало элемента wrap
- * @param {object} data
+ * @param {Card} card
  * @param {ParentNode} wrap
  */
-function renderCard(data, wrap) {
-  wrap.prepend(createCard(data));
+function renderCard(card, wrap) {
+  wrap.prepend(card);
 }
 
-/**
- * смена стилей на лайке
- */
-function handleLikeIcon(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-/**
- * удаление карточки
- */
-function handleDeleteCard(evt) {
-  evt.target.closest('.element').remove();
-}
 
 /**
  * Вешаем обработчики
@@ -98,6 +64,13 @@ function addEventListeners() {
       }
     });
   });
+
+  // Открытие картинки для просмотра
+  elementsBlock.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('element__image')) {
+      showPopupViewPicture({ link: evt.target.src, name: evt.target.alt });
+    }
+  })
 }
 
 /**
@@ -150,7 +123,8 @@ function saveProfile() {
  * Добавление карточки
  */
 function saveCard() {
-  renderCard({ name: popupAddPlace.value, link: popupAddUrl.value }, elementsBlock);
+  const card = new Card({ name: popupAddPlace.value, link: popupAddUrl.value }, '#card-template');
+  renderCard(card.getCard(), elementsBlock);
   closePopup(popupAddNewPlace);
   popupAddNewPlaceForm.reset();
 }
