@@ -20,7 +20,7 @@ export class FormValidator {
   /**
    * Включаем валидацию
    */
-  enableValidation() {
+  enableValidation = () => {
     this._setFormEventListeners()
     this._toggleButtonState()
   }
@@ -29,7 +29,7 @@ export class FormValidator {
   /**
    * Вешаем обработчики
    */
-  _setFormEventListeners() {
+  _setFormEventListeners = () => {
     this._form
       .addEventListener('submit', evt => evt.preventDefault())
 
@@ -47,7 +47,7 @@ export class FormValidator {
    * Переключает состояние кнопки button в зависимости от наличия ошибок валидации
    * @param {boolean} off - если true - то выключить кнопку принудительно
    */
-  _toggleButtonState(off = false) {
+  _toggleButtonState = (off = false) => {
     if (this._hasErrorField() || off) {
       this._buttonSubmit.classList.add(this._inactiveButtonClass)
       this._buttonSubmit.setAttribute('disabled', 'true')
@@ -63,7 +63,7 @@ export class FormValidator {
    * @param {Node} fieldError
    * @param {string} errorMessage
    */
-  _setFieldError(fieldError, errorMessage) {
+  _setFieldError = (fieldError, errorMessage) => {
     if (errorMessage.length > 0) {
       fieldError.classList.add('popup__error_active')
     } else {
@@ -77,7 +77,7 @@ export class FormValidator {
    * Возвращает true если есть хоть один невалидный input в this._inputList
    * @returns boolean
    */
-  _hasErrorField() {
+  _hasErrorField = () => {
     return Array.from(this._inputList).some(input => !input.validity.valid)
   }
 
@@ -88,7 +88,7 @@ export class FormValidator {
    * Скрытие о итображение элемента error реализовано в css псевдоклассом :invalid
    * @param {HTMLObjectElement} input
    */
-  _checkInputValidity(input) {
+  _checkInputValidity = (input) => {
     const error = input.parentElement
       .querySelector(this._errorSelector)
     this._setFieldError(error, !input.validity.valid ? input.validationMessage : '')

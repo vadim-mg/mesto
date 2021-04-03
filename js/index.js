@@ -42,11 +42,20 @@ const popups = document.querySelectorAll('.popup')
 /**
  * Выводим все карточки
  */
-function renderList() {
-  initialCards.forEach(function (item) {
-    const card = new Card(item.link, item.name, '#card-template')
-    renderCard(card.getCard(), elementsBlock)
-  })
+const renderList = () => {
+  initialCards.forEach(item => renderCard(createCard(item.link, item.name), elementsBlock))
+}
+
+
+/**
+ * создание карточки
+ * @param {string} link
+ * @param {string} name
+ * @returns Card
+ */
+const createCard = (link, name) => {
+  const card = new Card(link, name, '#card-template', showPopupViewPicture)
+  return card.getCard()
 }
 
 
@@ -55,15 +64,13 @@ function renderList() {
  * @param {Card} card
  * @param {ParentNode} wrap
  */
-function renderCard(card, wrap) {
-  wrap.prepend(card)
-}
+const renderCard = (card, wrap) => wrap.prepend(card)
 
 
 /**
  * Вешаем обработчики
  */
-function addEventListeners() {
+const addEventListeners = () => {
   profileEditButton.addEventListener('click', showEditProfile)
   profileAddButton.addEventListener('click', () => openPopup(popupAddNewPlace))
   popupEditProfile.addEventListener('submit', saveProfile)
@@ -77,30 +84,26 @@ function addEventListeners() {
       }
     })
   })
-
-  // Открытие картинки для просмотра
-  elementsBlock.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('element__image')) {
-      showPopupViewPicture({ link: evt.target.src, name: evt.target.alt })
-    }
-  })
 }
+
 
 /**
  * открытие попапа popup
  */
-function openPopup(popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened')
   document.addEventListener('keydown', escEventListener)
 }
 
+
 /**
  * закрытие попапа popup
  */
-function closePopup(popup) {
+const closePopup = (popup) => {
   document.removeEventListener('keydown', escEventListener)
   popup.classList.remove('popup_opened')
 }
+
 
 /**
  * закрытие попапов по ESC
@@ -113,10 +116,11 @@ const escEventListener = (evt) => {
   }
 }
 
+
 /**
  * Показ формы редактирования профиля
  */
-function showEditProfile() {
+const showEditProfile = () => {
   let event = new Event('input')
   profileNameField.value = profileName.textContent
   profileNameField.dispatchEvent(event)
@@ -125,33 +129,39 @@ function showEditProfile() {
   openPopup(popupEditProfile)
 }
 
+
 /**
  * Сохранение профиля
  */
-function saveProfile() {
+const saveProfile = () => {
   profileName.textContent = profileNameField.value
   profileDescription.textContent = profileDescriptionField.value
   closePopup(popupEditProfile)
 }
 
+
 /**
  * Добавление карточки
  */
-function saveCard() {
-  const card = new Card(popupAddUrl.value, popupAddPlace.value, '#card-template')
-  renderCard(card.getCard(), elementsBlock)
+const saveCard = () => {
+  renderCard(
+    createCard(popupAddUrl.value, popupAddPlace.value),
+    elementsBlock
+  )
   closePopup(popupAddNewPlace)
   popupAddNewPlaceForm.reset()
 }
 
+
 /**
- * Показыаем карточку {item} на весь экран
- * @param {Object} item { item.link: string, item.name: string }
+ * Показыаем карточку на весь экран
+ * @param {string} link
+ * @param {string} name
  */
-function showPopupViewPicture(item) {
-  popupImage.src = item.link
-  popupImage.alt = item.name
-  popupName.textContent = item.name
+const showPopupViewPicture = (link, name) => {
+  popupImage.src = link
+  popupImage.alt = name
+  popupName.textContent = name
   openPopup(popupViewForm)
 }
 
@@ -165,3 +175,4 @@ formList.forEach(form => {
   const formValidator = new FormValidator(validationParams, form)
   formValidator.enableValidation()
 })
+
