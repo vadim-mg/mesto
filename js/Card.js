@@ -1,35 +1,51 @@
 export class Card {
 
+
   /**
-   *  Создание карточки
-   * @param {Object} item - объект карточки
-   * @param {string} templateSelector - шаблон карточки
+   * Создание карточки
+   * @param {string} link
+   * @param {string} text
+   * @param {string} templateSelector
    */
-  constructor(item, templateSelector) {
-    const cardTemplate = document.querySelector(templateSelector).content.querySelector('.element');
-    this._card = cardTemplate.cloneNode(true);
-    this._image = this._card.querySelector('.element__image');
-    this._text = this._card.querySelector('.element__text');
+  constructor(link, text, templateSelector) {
+    this._card = document
+      .querySelector(templateSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true)
 
     // заполняем карточку
-    this._setParams(item);
+    this._init(link, text)
 
     // вешаем обработчики
-    this._setEventListeners();
+    this._setEventListeners()
   }
+
+
+  /**
+   * Возвращает блок с карточкой
+   * @returns Node
+   */
+  getCard() {
+    return this._card
+  }
+
 
   /**
    * Заполнение полей в карточке
-   * @param {Object} item
+   * @param {string} link
+   * @param {string} text
    */
-  _setParams(item) {
-    this._image.src = item.link;
-    this._image.alt = item.name;
-    this._text.textContent = item.name;
+  _init(link, text) {
+    const image = this._card
+      .querySelector('.element__image')
+    const name = this._card
+      .querySelector('.element__text')
+    image.src = link
+    image.alt = text
+    name.textContent = text
   }
-  getCard() {
-    return this._card;
-  }
+
 
   /**
    * утановка обработчиков событий для карточек
@@ -37,31 +53,27 @@ export class Card {
   _setEventListeners() {
     // клику по иконке сердце
     this._card.querySelector('.element__like')
-      .addEventListener('click', this._handleLikeIcon);
+      .addEventListener('click', this._handleLikeIcon)
     // клик по корзине
     this._card.querySelector('.element__bin')
-      .addEventListener('click', this._handleDeleteCard);
-    // this._image.addEventListener('click', () => {
-    //   showPopupViewPicture(item)
-    // });
+      .addEventListener('click', this._handleDeleteCard)
   }
+
 
   /**
   * смена стилей на лайке
   */
   _handleLikeIcon(evt) {
-    evt.target.classList.toggle('element__like_active');
+    evt.target.classList.toggle('element__like_active')
   }
+
 
   /**
    * удаление карточки
    */
   _handleDeleteCard(evt) {
-    evt.target.closest('.element').remove();
+    evt.target.closest('.element').remove()
   }
 
-
 }
-
-// export let str = 'test';
 
