@@ -1,6 +1,7 @@
 import { Card } from '../components/Card.js'
 import { FormValidator } from '../components/FormValidator.js'
-import { initialCards } from '../components/initialCards.js'
+import { initialCards } from '../utils/initialCards.js'
+import { Section } from '../components/Section.js'
 
 /**
  * Параметры валидации
@@ -43,10 +44,17 @@ const popups = document.querySelectorAll('.popup')
  * Выводим все карточки
  */
 function renderList() {
-  initialCards.forEach(function (item) {
-    const card = new Card(item.link, item.name, '#card-template')
-    renderCard(card.getCard(), elementsBlock)
-  })
+  const cardList = new Section({
+    items: initialCards,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem.link, cardItem.name, '#card-template')
+      const cardElement = card.getCard()
+      cardList.addItem(cardElement)
+    }
+  },
+    '.elements'
+  )
+  cardList.renderer()
 }
 
 
