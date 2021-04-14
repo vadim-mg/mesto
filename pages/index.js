@@ -1,6 +1,6 @@
-import { Card } from './Card.js'
-import { FormValidator } from './FormValidator.js'
-import { initialCards } from './initialCards.js'
+import { Card } from '../components/Card.js'
+import { FormValidator } from '../components/FormValidator.js'
+import { initialCards } from '../components/initialCards.js'
 
 /**
  * Параметры валидации

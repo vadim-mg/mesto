@@ -1,0 +1,22 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "### Обзор",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadim-mg/mesto.git"
+  },
+  "author": "Vadim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vadim-mg/mesto/issues"
+  },
+  "homepage": "https://github.com/vadim-mg/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.32.0"
+  }
+}
