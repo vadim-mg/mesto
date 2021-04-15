@@ -1,4 +1,5 @@
-export class Section {
+export default class Section {
+
   /**
    * Создание экземляра отрисовщика
    * @param {Array } items - массив элементов
@@ -25,6 +26,6 @@ export class Section {
    * @param {Node} element
    */
   addItem(element) {
-    this._container.append(element)
+    this._container.prepend(element)
   }
 }
