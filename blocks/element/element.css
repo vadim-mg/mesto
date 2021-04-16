@@ -4,7 +4,7 @@
   border-radius: 10px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(282px, 1fr);
+  grid-template-columns: minmax(254px, 1fr);
   grid-template-rows: 1fr 80px;
   align-items: stretch;
   position: relative;
