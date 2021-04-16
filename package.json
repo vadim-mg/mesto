@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/vadim-mg/mesto#readme",
   "devDependencies": {
-    "webpack": "^5.32.0"
-  }
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {}
 }
