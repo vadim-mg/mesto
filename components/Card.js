@@ -1,23 +1,18 @@
 export default class Card {
 
-
   /**
    * Создание карточки
    * @param {string} link
    * @param {string} text
    * @param {string} templateSelector
+   * @param {function} handleCardClick - обработычик клика по карточке
    */
-  constructor(link, text, templateSelector) {
-    this._card = document
-      .querySelector(templateSelector)
-      .content
-      .querySelector('.element')
-      .cloneNode(true)
-
-    // заполняем карточку
-    this._init(link, text)
-
-    // вешаем обработчики
+  constructor(link, text, templateSelector, handleCardClick) {
+    this._link = link
+    this._text = text
+    this._templateSelector = templateSelector
+    this._handleCardClick = handleCardClick
+    this._init()
     this._setEventListeners()
   }
 
@@ -32,18 +27,21 @@ export default class Card {
 
 
   /**
-   * Заполнение полей в карточке
-   * @param {string} link
-   * @param {string} text
+   * Инициаоизация карточки, клонирование элемента из шаблона, заполнение атрибутов,
    */
-  _init(link, text) {
+  _init() {
+    this._card = document
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true)
     const image = this._card
       .querySelector('.element__image')
-    const name = this._card
+    image.src = this._link
+    image.alt = this._text
+    this._card
       .querySelector('.element__text')
-    image.src = link
-    image.alt = text
-    name.textContent = text
+      .textContent = this._text
   }
 
 
@@ -51,12 +49,14 @@ export default class Card {
    * утановка обработчиков событий для карточек
    */
   _setEventListeners() {
-    // клику по иконке сердце
-    this._card.querySelector('.element__like')
+    this._card
+      .querySelector('.element__like')
       .addEventListener('click', this._handleLikeIcon)
-    // клик по корзине
-    this._card.querySelector('.element__bin')
+    this._card
+      .querySelector('.element__bin')
       .addEventListener('click', this._handleDeleteCard)
+    this._card
+      .addEventListener('click', () => this._handleCardClick(this._link, this._text))
   }
 
 
@@ -64,6 +64,7 @@ export default class Card {
   * смена стилей на лайке
   */
   _handleLikeIcon(evt) {
+    evt.stopPropagation()
     evt.target.classList.toggle('element__like_active')
   }
 
@@ -72,6 +73,7 @@ export default class Card {
    * удаление карточки
    */
   _handleDeleteCard(evt) {
+    evt.stopPropagation()
     evt.target.closest('.element').remove()
   }
 

@@ -13,12 +13,19 @@ export default class Popup {
     this._element.classList.remove('popup_opened')
   }
 
+  /**
+   * закрытие попапа по ESC
+   * @param {Event} evt
+   */
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
       this.close()
     }
   }
 
+  /**
+   * Вешаем обработчики событий на клик
+   */
   setEventListeners() {
     this._element.addEventListener('click', (evt) => {
       if ((evt.target === this._element) || evt.target.classList.contains('popup__close-button')) {

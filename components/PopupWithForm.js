@@ -2,6 +2,11 @@ import { formSelector } from '../utils/constants.js'
 import Popup from './Popup.js'
 
 export default class PopupWithForm extends Popup {
+  /**
+   * создание попапа с формой
+   * @param {String} popupSelector
+   * @param {Function} submitFunction - callback - функция отправки формы
+   */
   constructor(popupSelector, submitFunction) {
     super(popupSelector)
     this._form = this._element.querySelector(formSelector)
@@ -9,6 +14,10 @@ export default class PopupWithForm extends Popup {
     this._submitFunction = submitFunction
   }
 
+  /**
+   * Возвращает все поля формы
+   * @returns Array - с индексами равными аттрибут name у поля и значением value
+   */
   _getInputValues() {
     return Array.from(this._inputList).reduce((acc, i) => {
       acc[i.name] = i.value
@@ -16,10 +25,14 @@ export default class PopupWithForm extends Popup {
     },{})
   }
 
+  /**
+   * Заполнение полей значениями из объекта data
+   * @param {Object} data
+   */
   setInputValues(data){
     let event = new Event('input')
     this._inputList.forEach(i =>{
-      i.value = data[i.name]
+      i.value = data[i.name] || ''
       i.dispatchEvent(event)
     })
   }

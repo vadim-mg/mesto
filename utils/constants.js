@@ -1,7 +1,9 @@
 
+// Селекторы для карточек
 export const cardTemplateSelector = '#card-template'
 export const cardsContainer = '.elements'
 
+// Селекторы для попапов
 export const popupViewSelector = '.popup_view'
 export const popupViewImageSelector = '.popup__picture-image'
 export const popupViewNameSelector = '.popup__picture-name'
@@ -11,11 +13,11 @@ export const popupEditSelector = '.popup_edit'
 
 export const formSelector = 'form.popup__container'
 
-
+// Селекторы для профиля
 export const profileNameSelector = '.profile__name'
 export const profileDescriptionSelector = '.profile__description'
-export const profileEditButton = document.querySelector('.profile__edit-button')
-export const profileAddButton = document.querySelector('.profile__add-button')
+export const profileEditButtonSelector = '.profile__edit-button'
+export const profileAddButtonSelector = '.profile__add-button'
 
 
 /**
