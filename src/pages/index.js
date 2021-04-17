@@ -44,12 +44,12 @@ const popupAddPlace = new PopupWithForm(
 const popupEditProfile = new PopupWithForm(
   popupEditSelector,
   item => userInfo.setUserInfo(item.name, item.description)
-  )
+)
 
 //рендеринг, влкючение валидации и обработчиков событий
-  cardList.renderer()
-  enableValidation()
-  addEventListeners()
+cardList.renderer()
+enableValidation()
+addEventListeners()
 
 //--------
 
@@ -59,7 +59,7 @@ const popupEditProfile = new PopupWithForm(
  * @param {Node} cardList - список карточек
  * @param {String} cardTemplate - шаблон карточки
  */
-function addCardToList({ link, name }, cardList, cardTemplate = cardTemplateSelector){
+function addCardToList({ link, name }, cardList, cardTemplate = cardTemplateSelector) {
   const card = new Card(
     link,
     name,
@@ -86,6 +86,7 @@ function enableValidation() {
  * Вешаем обработчики
  */
 function addEventListeners() {
+  // включаем обработчики на формах
   popupView
     .setEventListeners()
   popupAddPlace
@@ -93,10 +94,12 @@ function addEventListeners() {
   popupEditProfile
     .setEventListeners()
 
+  // на кнопку добавления изображения
   document
     .querySelector(profileAddButtonSelector)
     .addEventListener('click', () => popupAddPlace.open())
 
+  // на кнопку редактирования профиля
   document
     .querySelector(profileEditButtonSelector)
     .addEventListener('click', () => {
