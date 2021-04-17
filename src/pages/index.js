@@ -1,3 +1,4 @@
+import './index.css'
 import {
   popupViewSelector,
   popupEditSelector,
@@ -46,7 +47,6 @@ const popupEditProfile = new PopupWithForm(
   )
 
 //рендеринг, влкючение валидации и обработчиков событий
-
   cardList.renderer()
   enableValidation()
   addEventListeners()
@@ -104,5 +104,3 @@ function addEventListeners() {
       popupEditProfile.open()
     })
 }
-
-

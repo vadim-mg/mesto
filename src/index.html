@@ -6,19 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="pages/index.css">
+  <!-- <link rel="stylesheet" href="pages/index.css"> -->
 
 </head>
 
 <body class="page">
   <header class="header container">
     <a href="#" class="header__link" target="_self">
-      <img src="images/logo/logo.svg" class="header__logo" alt="логотип: Mesto - Russia">
+      <img src="<%=require('./images/logo/logo.svg')%>" class="header__logo" alt="логотип: Mesto - Russia">
     </a>
   </header>
   <main class="content container">
     <section class="profile">
-      <img src="images/avatar/kusto.jpg" alt="Фото профиля" class="profile__avatar">
+      <img src="<%=require('./images/avatar/kusto.jpg')%>" alt="Фото профиля" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button" type="button"
                 aria-label="edit_profile"></button>
@@ -90,7 +90,6 @@
     </div>
   </div>
 
-  <script type="module" src="pages/index.js"></script>
 </body>
 
 </html>
