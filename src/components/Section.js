@@ -16,16 +16,18 @@ export default class Section {
    * Отрисовка всех элементов this._renderdItems
    */
   renderer() {
-    this._renderdItems.forEach((item) => {
-      this._renderer(item)
-    })
+    this._renderdItems.forEach(item => this._renderer(item))
   }
 
   /**
    * Добавление
    * @param {Node} element
+   * @param {boolean} if prepend than will use prepend
    */
-  addItem(element) {
-    this._container.prepend(element)
+  addItem(element, prepend) {
+    if (prepend)
+      this._container.prepend(element)
+    else
+      this._container.append(element)
   }
 }

@@ -37,7 +37,7 @@ const userInfo = new UserInfo({
 // Форма добаляения карточек
 const popupAddPlace = new PopupWithForm(
   popupAddPlaceSelector,
-  item => addCardToList({ link: item.url, name: item.place }, cardList)
+  item => addCardToList({ link: item.url, name: item.place }, cardList, true)
 )
 
 // Форма профиля
@@ -58,15 +58,16 @@ addEventListeners()
  * @param {Object} { link, name } - данные для карточки
  * @param {Node} cardList - список карточек
  * @param {String} cardTemplate - шаблон карточки
+ * @param {boolean} prepend - if true add to end
  */
-function addCardToList({ link, name }, cardList, cardTemplate = cardTemplateSelector) {
+function addCardToList({ link, name }, cardList, prepend = false, cardTemplate = cardTemplateSelector) {
   const card = new Card(
     link,
     name,
     cardTemplate,
     (link, name) => popupView.open({ link: link, name: name })
   )
-  cardList.addItem(card.getCard())
+  cardList.addItem(card.getCard(), prepend)
 }
 
 

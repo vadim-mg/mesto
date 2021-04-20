@@ -22,16 +22,16 @@ export default class PopupWithForm extends Popup {
     return Array.from(this._inputList).reduce((acc, i) => {
       acc[i.name] = i.value
       return acc
-    },{})
+    }, {})
   }
 
   /**
    * Заполнение полей значениями из объекта data
    * @param {Object} data
    */
-  setInputValues(data){
+  setInputValues(data) {
     let event = new Event('input')
-    this._inputList.forEach(i =>{
+    this._inputList.forEach(i => {
       i.value = data[i.name] || ''
       i.dispatchEvent(event)
     })
@@ -42,11 +42,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', () => {
       this._submitFunction(this._getInputValues())
       this.close()
+      this._form.reset()
     })
-  }
-
-  close() {
-    super.close()
-    this._form.reset()
   }
 }

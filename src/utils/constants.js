@@ -27,6 +27,7 @@ export const validationParams = {
   formSelector: formSelector,
   inputSelector: '.popup__input',
   errorSelector: '.popup__error',
+  errorActiveSelector: '.popup__error_active',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
 }

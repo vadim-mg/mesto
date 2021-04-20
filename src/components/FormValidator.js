@@ -13,6 +13,7 @@ export default class FormValidator {
       .querySelector(validationParams.submitButtonSelector)
 
     this._errorSelector = validationParams.errorSelector
+    this._activeErrorSelector = validationParams.errorActiveSelector
     this._inactiveButtonClass = validationParams.inactiveButtonClass
   }
 
@@ -65,9 +66,9 @@ export default class FormValidator {
    */
   _setFieldError = (fieldError, errorMessage) => {
     if (errorMessage.length > 0) {
-      fieldError.classList.add('popup__error_active')
+      fieldError.classList.add(this._activeErrorSelector)
     } else {
-      fieldError.classList.remove('popup__error_active')
+      fieldError.classList.remove(this._activeErrorSelector)
     }
     fieldError.textContent = errorMessage
   }
@@ -88,7 +89,7 @@ export default class FormValidator {
    * Скрытие о итображение элемента error реализовано в css псевдоклассом :invalid
    * @param {HTMLObjectElement} input
    */
-  _checkInputValidity = (input) => {
+  _checkInputValidity = input => {
     const error = input.parentElement
       .querySelector(this._errorSelector)
     this._setFieldError(error, !input.validity.valid ? input.validationMessage : '')
