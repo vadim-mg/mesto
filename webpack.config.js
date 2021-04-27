@@ -12,6 +12,7 @@ module.exports = {
   },
 
   mode: 'development',
+  devtool: "source-map",
 
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
@@ -38,11 +39,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, {
-          loader: 'css-loader',
-          options: { importLoaders: 1 }
-        },
-          'postcss-loader'
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: true }
+          }
         ],
       }
     ]
