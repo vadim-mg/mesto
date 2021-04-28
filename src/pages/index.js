@@ -6,10 +6,8 @@ import {
   cardTemplateSelector,
   validationParams,
   cardsContainer,
-  profileNameSelector,
-  profileDescriptionSelector,
-  profileAddButtonSelector,
-  profileEditButtonSelector
+  userInfoSettings,
+  apiSettings
 } from '../utils/constants.js'
 import { initialCards } from '../utils/initialCards.js'
 import Card from '../components/Card.js'
@@ -18,6 +16,10 @@ import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
+import Api from '../components/Api.js'
+
+const api = new Api(apiSettings)
+
 
 // Создаем попап для просмотра карточек
 const popupView = new PopupWithImage(popupViewSelector)
@@ -28,11 +30,6 @@ const cardList = new Section({
   renderer: item => addCardToList(item, cardList)
 }, cardsContainer)
 
-// Создаем екзкмпляр для профиля
-const userInfo = new UserInfo({
-  nameSelector: profileNameSelector,
-  descriptionSelector: profileDescriptionSelector
-})
 
 // Форма добаляения карточек
 const popupAddPlace = new PopupWithForm(
@@ -45,6 +42,26 @@ const popupEditProfile = new PopupWithForm(
   popupEditSelector,
   item => userInfo.setUserInfo(item.name, item.description)
 )
+
+// Создаем екземпляр для профиля
+const userInfo = new UserInfo(
+  userInfoSettings,
+  inputValues => {
+    popupEditProfile.setInputValues(inputValues)
+    popupEditProfile.open()
+  },
+  () => popupAddPlace.open()
+)
+
+api.loadUserInfo()
+  .then((value) => {
+    userInfo.setUserInfo(value.name, value.about)
+    userInfo.showEditButton()
+    userInfo.setAvatar(value.avatar)
+  })
+  .catch(() => {
+    console.error('Получить данные профиля не удалось')
+  })
 
 //рендеринг, влкючение валидации и обработчиков событий
 cardList.renderer()
@@ -94,17 +111,6 @@ function addEventListeners() {
     .setEventListeners()
   popupEditProfile
     .setEventListeners()
-
-  // на кнопку добавления изображения
-  document
-    .querySelector(profileAddButtonSelector)
-    .addEventListener('click', () => popupAddPlace.open())
-
-  // на кнопку редактирования профиля
-  document
-    .querySelector(profileEditButtonSelector)
-    .addEventListener('click', () => {
-      popupEditProfile.setInputValues(userInfo.getUserInfo())
-      popupEditProfile.open()
-    })
+  userInfo
+    .setEventListeners()
 }

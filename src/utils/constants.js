@@ -14,10 +14,15 @@ export const popupEditSelector = '.popup_edit'
 export const formSelector = 'form.popup__container'
 
 // Селекторы для профиля
-export const profileNameSelector = '.profile__name'
-export const profileDescriptionSelector = '.profile__description'
-export const profileEditButtonSelector = '.profile__edit-button'
-export const profileAddButtonSelector = '.profile__add-button'
+export const userInfoSettings = {
+  'profileSelector': '.profile',
+  'profileNameSelector': '.profile__name',
+  'profileDescriptionSelector': '.profile__description',
+  'profileAvatarSelector': '.profile__avatar',
+  'profileEditButtonSelector': '.profile__edit-button',
+  'profileEditButtonHiddenClass': 'profile__edit-button_hidden',
+  'profileAddButtonSelector': '.profile__add-button'
+}
 
 
 /**
@@ -32,3 +37,12 @@ export const validationParams = {
   inactiveButtonClass: 'popup__button_disabled',
 }
 
+
+/*
+* Подключение к API
+*/
+
+export const apiSettings = {
+  token: 'd119b3a4-6901-4a18-8871-5024c655ab94',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-23/'
+}
