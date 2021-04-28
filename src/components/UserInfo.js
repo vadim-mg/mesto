@@ -12,9 +12,9 @@ export default class UserInfo {
     profileEditButtonHiddenClass,
     profileAddButtonSelector },
     editProfilFunction,
-    addPlaceFunction
+    addPlaceFunction,
+    loaderAPIFunction
   ) {
-    // debugger
     const profile = document.querySelector(profileSelector)
 
     this._name = profile.querySelector(profileNameSelector)
@@ -27,6 +27,7 @@ export default class UserInfo {
 
     this._editProfileFunction = editProfilFunction
     this._addPlaceFunction = addPlaceFunction
+    this._loaderAPIFuncion = loaderAPIFunction
   }
 
   getUserInfo() {
@@ -45,7 +46,7 @@ export default class UserInfo {
     this._avatar.src = url
   }
 
-  showEditButton() {
+  _showEditButton() {
     this._profileEditButton.classList.remove(this._buttonHiddenClass)
   }
 
@@ -57,6 +58,18 @@ export default class UserInfo {
     this._profileAddButton
       .addEventListener('click', () => {
         this._addPlaceFunction()
+      })
+  }
+
+  show() {
+    this._loaderAPIFuncion()
+      .then((value) => {
+        this.setUserInfo(value.name, value.about)
+        this._showEditButton()
+        this.setAvatar(value.avatar)
+      })
+      .catch(() => {
+        console.error('Получить данные профиля не удалось')
       })
   }
 }

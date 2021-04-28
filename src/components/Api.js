@@ -12,10 +12,15 @@ export default class Api {
     })
       .then(res => {
         if (res.ok) {
-          return Promise.resolve(res.json())
+          // return Promise.resolve(res.json())
+          return res.json()
         }
         return Promise.reject(` Status Code: ${res.status}`)
       })
       .catch(err => console.error(`Ошибка: ${err}`))
+  }
+
+  loadCards() {
+
   }
 }

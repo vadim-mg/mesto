@@ -46,24 +46,26 @@ const popupEditProfile = new PopupWithForm(
 // Создаем екземпляр для профиля
 const userInfo = new UserInfo(
   userInfoSettings,
-  inputValues => {
+  (inputValues) => {
     popupEditProfile.setInputValues(inputValues)
     popupEditProfile.open()
   },
-  () => popupAddPlace.open()
+  () => popupAddPlace.open(),
+  () => api.loadUserInfo()
 )
 
-api.loadUserInfo()
-  .then((value) => {
-    userInfo.setUserInfo(value.name, value.about)
-    userInfo.showEditButton()
-    userInfo.setAvatar(value.avatar)
-  })
-  .catch(() => {
-    console.error('Получить данные профиля не удалось')
-  })
+// api.loadUserInfo()
+//   .then((value) => {
+//     userInfo.setUserInfo(value.name, value.about)
+//     userInfo.showEditButton()
+//     userInfo.setAvatar(value.avatar)
+//   })
+//   .catch(() => {
+//     console.error('Получить данные профиля не удалось')
+//   })
 
 //рендеринг, влкючение валидации и обработчиков событий
+userInfo.show()
 cardList.renderer()
 enableValidation()
 addEventListeners()
