@@ -27,7 +27,7 @@ export default class UserInfo {
 
     this._editProfileFunction = editProfilFunction
     this._addPlaceFunction = addPlaceFunction
-    this._loaderAPIFuncion = loaderAPIFunction
+    this._loaderFuncion = loaderAPIFunction
   }
 
   getUserInfo() {
@@ -62,7 +62,7 @@ export default class UserInfo {
   }
 
   show() {
-    this._loaderAPIFuncion()
+    this._loaderFuncion()
       .then((value) => {
         this.setUserInfo(value.name, value.about)
         this._showEditButton()
@@ -70,6 +70,7 @@ export default class UserInfo {
       })
       .catch(() => {
         console.error('Получить данные профиля не удалось')
+        this.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
       })
   }
 }

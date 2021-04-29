@@ -25,6 +25,9 @@ export default class Api {
         ? res.json()
         : Promise.reject(` Status Code: ${res.status}`)
       )
-      .catch(err => console.error(`Ошибка: ${err}`))
+      .catch(err => {
+        console.error(`Ошибка загрузки карточек: ${err}`)
+        return []
+      })
   }
 }

@@ -42,16 +42,20 @@ const popupEditProfile = new PopupWithForm(
   item => userInfo.setUserInfo(item.name, item.description)
 )
 
+// Открытие формы редактированя профиля
+const popupEditProfileOpen = inputValues => {
+  popupEditProfile.setInputValues(inputValues)
+  popupEditProfile.open()
+}
+
 // Создаем екземпляр для профиля
 const userInfo = new UserInfo(
   userInfoSettings,
-  (inputValues) => {
-    popupEditProfile.setInputValues(inputValues)
-    popupEditProfile.open()
-  },
+  inputValues => popupEditProfileOpen(inputValues),
   () => popupAddPlace.open(),
   () => api.loadUserInfo()
 )
+
 
 
 
