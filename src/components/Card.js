@@ -4,14 +4,40 @@ export default class Card {
    * Создание карточки
    * @param {string} link
    * @param {string} text
-   * @param {string} templateSelector
+   * @param {Number} likeCount
+   * @param {Object} Selectors
    * @param {function} handleCardClick - обработычик клика по карточке
    */
-  constructor(link, text, templateSelector, handleCardClick) {
+  constructor(link,
+    text,
+    likeCount,
+    { cardTemplateSelector,
+      elementSelector,
+      imageSelector,
+      binSelector,
+      captionSelector,
+      textSelector,
+      likeSelector,
+      likeActiveClass,
+      likeCountSelector
+    },
+    handleCardClick
+  ) {
+    this._templateSelector = cardTemplateSelector
+    this._elementSelector = elementSelector
+    this._imageSelector = imageSelector
+    this._binSelector = binSelector
+    this._captionSelector = captionSelector
+    this._textSelector = textSelector
+    this._likeSelector = likeSelector
+    this._likeActiveClass = likeActiveClass
+    this._likeCountSelector = likeCountSelector
+
     this._link = link
     this._text = text
-    this._templateSelector = templateSelector
+    this._likeCount = likeCount
     this._handleCardClick = handleCardClick
+
     this._init()
     this._setEventListeners()
   }
@@ -31,15 +57,18 @@ export default class Card {
     this._card = document
       .querySelector(this._templateSelector)
       .content
-      .querySelector('.element')
+      .querySelector(this._elementSelector)
       .cloneNode(true)
     const image = this._card
-      .querySelector('.element__image')
+      .querySelector(this._imageSelector)
     image.src = this._link
     image.alt = this._text
     this._card
-      .querySelector('.element__text')
+      .querySelector(this._textSelector)
       .textContent = this._text
+    this._card
+      .querySelector(this._likeCountSelector)
+      .textContent = this._likeCount
   }
 
 
@@ -48,11 +77,11 @@ export default class Card {
    */
   _setEventListeners() {
     this._card
-      .querySelector('.element__like')
-      .addEventListener('click', this._handleLikeIcon)
+      .querySelector(this._likeSelector)
+      .addEventListener('click', this._handleLikeIcon.bind(this))
     this._card
-      .querySelector('.element__bin')
-      .addEventListener('click', this._handleDeleteCard)
+      .querySelector(this._binSelector)
+      .addEventListener('click', this._handleDeleteCard.bind(this))
     this._card
       .addEventListener('click', () => this._handleCardClick(this._link, this._text))
   }
@@ -63,7 +92,7 @@ export default class Card {
   */
   _handleLikeIcon(evt) {
     evt.stopPropagation()
-    evt.target.classList.toggle('element__like_active')
+    evt.target.classList.toggle(this._likeActiveClass)
   }
 
 
@@ -72,7 +101,7 @@ export default class Card {
    */
   _handleDeleteCard(evt) {
     evt.stopPropagation()
-    evt.target.closest('.element').remove()
+    evt.target.closest(this._elementSelector).remove()
   }
 
 }

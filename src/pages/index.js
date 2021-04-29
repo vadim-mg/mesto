@@ -7,7 +7,8 @@ import {
   validationParams,
   cardsContainer,
   userInfoSettings,
-  apiSettings
+  apiSettings,
+  cardSelectors
 } from '../utils/constants.js'
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
@@ -84,16 +85,17 @@ addEventListeners()
 
 /**
  * Создает экземпляр карточки и добавляет его в список
- * @param {Object} { link, name } - данные для карточки
+ * @param {Object} { link, name, likes } - данные для карточки
  * @param {Node} cardList - список карточек
  * @param {String} cardTemplate - шаблон карточки
  * @param {boolean} prepend - if true add to end
  */
-function addCardToList({ link, name }, cardList, prepend = false, cardTemplate = cardTemplateSelector) {
+function addCardToList({ link, name, likes }, cardList, prepend = false, selectors = cardSelectors) {
   const card = new Card(
     link,
     name,
-    cardTemplate,
+    likes && likes.length || 0,
+    selectors,
     (link, name) => popupView.open({ link: link, name: name })
   )
   cardList.addItem(card.getCard(), prepend)

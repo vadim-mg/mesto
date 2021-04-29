@@ -1,7 +1,17 @@
 
 // Селекторы для карточек
-export const cardTemplateSelector = '#card-template'
 export const cardsContainer = '.elements'
+export const cardSelectors = {
+  'cardTemplateSelector': '#card-template',
+  'elementSelector': '.element',
+  'imageSelector': '.element__image',
+  'binSelector': '.element__bin',
+  'captionSelector': '.element__caption',
+  'textSelector': '.element__text',
+  'likeSelector': '.element__like',
+  'likeActiveClass': 'element__like_active',
+  'likeCountSelector': '.element__like-count'
+}
 
 // Селекторы для попапов
 export const popupViewSelector = '.popup_view'
