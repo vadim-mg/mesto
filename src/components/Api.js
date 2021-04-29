@@ -5,22 +5,26 @@ export default class Api {
   }
 
   loadUserInfo() {
-    return fetch(this.baseUrl + 'users/me', {
-      headers: {
-        authorization: this.token
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          // return Promise.resolve(res.json())
-          return res.json()
-        }
-        return Promise.reject(` Status Code: ${res.status}`)
+    return fetch(this.baseUrl + 'users/me',
+      {
+        headers: { authorization: this.token }
       })
+      .then(res => res.ok
+        ? res.json()
+        : Promise.reject(` Status Code: ${res.status}`)
+      )
       .catch(err => console.error(`Ошибка: ${err}`))
   }
 
   loadCards() {
-
+    return fetch(this.baseUrl + 'cards',
+      {
+        headers: { authorization: this.token }
+      })
+      .then(res => res.ok
+        ? res.json()
+        : Promise.reject(` Status Code: ${res.status}`)
+      )
+      .catch(err => console.error(`Ошибка: ${err}`))
   }
 }

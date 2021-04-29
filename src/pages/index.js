@@ -9,7 +9,6 @@ import {
   userInfoSettings,
   apiSettings
 } from '../utils/constants.js'
-import { initialCards } from '../utils/initialCards.js'
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js'
@@ -21,15 +20,15 @@ import Api from '../components/Api.js'
 const api = new Api(apiSettings)
 
 
-// Создаем попап для просмотра карточек
-const popupView = new PopupWithImage(popupViewSelector)
-
 // Создаем и наполняем список карточками
-const cardList = new Section({
-  items: initialCards,
-  renderer: item => addCardToList(item, cardList)
-}, cardsContainer)
+const cardList = new Section([], cardsContainer)
 
+api.loadCards()
+  .then(result => result.forEach(item => addCardToList(item, cardList)))
+
+
+// попап для просмотра карточек
+const popupView = new PopupWithImage(popupViewSelector)
 
 // Форма добаляения карточек
 const popupAddPlace = new PopupWithForm(
@@ -54,19 +53,11 @@ const userInfo = new UserInfo(
   () => api.loadUserInfo()
 )
 
-// api.loadUserInfo()
-//   .then((value) => {
-//     userInfo.setUserInfo(value.name, value.about)
-//     userInfo.showEditButton()
-//     userInfo.setAvatar(value.avatar)
-//   })
-//   .catch(() => {
-//     console.error('Получить данные профиля не удалось')
-//   })
+
+
 
 //рендеринг, влкючение валидации и обработчиков событий
 userInfo.show()
-cardList.renderer()
 enableValidation()
 addEventListeners()
 
