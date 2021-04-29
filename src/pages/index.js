@@ -25,6 +25,7 @@ const cardList = new Section([], cardsContainer)
 
 api.loadCards()
   .then(result => result.forEach(item => addCardToList(item, cardList)))
+  .catch(err => console.error(err))
 
 // попап для просмотра карточек
 const popupView = new PopupWithImage(popupViewSelector)
@@ -39,8 +40,9 @@ const popupAddPlace = new PopupWithForm(
 const popupEditProfile = new PopupWithForm(
   popupEditSelector,
   item => {
-    userInfo.setUserInfo(item.name, item.description)
     api.saveUserInfo(item.name, item.description)
+      .then(() => userInfo.setUserInfo(item.name, item.description))
+      .catch(err => console.error(err))
   }
 )
 
@@ -51,22 +53,22 @@ const popupEditProfileOpen = inputValues => {
 }
 
 
+// Создаем екземпляр для профиля
 const userInfo = new UserInfo(
   userInfoSettings,
   inputValues => popupEditProfileOpen(inputValues),
   () => popupAddPlace.open()
 )
-// Создаем екземпляр для профиля
 api.loadUserInfo()
-    .then((value) => {
-      userInfo.setUserInfo(value.name, value.about)
-      userInfo.showEditButton()
-      userInfo.setAvatar(value.avatar)
-    })
-    .catch(() => {
-      console.error('Получить данные профиля не удалось')
-      userInfo.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
-    })
+  .then(value => {
+    userInfo.setUserInfo(value.name, value.about)
+    userInfo.showEditButton()
+    userInfo.setAvatar(value.avatar)
+  })
+  .catch(err => {
+    console.error(err)
+    userInfo.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
+  })
 
 
 
