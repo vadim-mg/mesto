@@ -22,7 +22,10 @@ export default class Api {
     )
 
 
-  loadUserInfo = () => this._fetch('users/me', 'Ошибка загрузки профиля')
+  loadUserInfo = () => this._fetch(
+    'users/me',
+    'Ошибка загрузки профиля'
+  )
 
   saveUserInfo = (name, about) => this._fetch(
     'users/me',
@@ -31,7 +34,17 @@ export default class Api {
     { name: name, about: about }
   )
 
-  loadCards = () => this._fetch('cards', 'Ошибка загрузки карточек')
+  loadCards = () => this._fetch(
+    'cards',
+    'Ошибка загрузки карточек'
+  )
+
+  saveCard = ({link, name}) => this._fetch(
+    'cards',
+    'Ошибка сохранения карточки',
+    'POST',
+    {name: name, link: link}
+  )
 }
 
 

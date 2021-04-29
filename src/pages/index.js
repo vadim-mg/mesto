@@ -33,7 +33,11 @@ const popupView = new PopupWithImage(popupViewSelector)
 // Форма добаляения карточек
 const popupAddPlace = new PopupWithForm(
   popupAddPlaceSelector,
-  item => addCardToList({ link: item.url, name: item.place }, cardList, true)
+  item => {
+    api.saveCard(item)
+      .then(() => addCardToList(item, cardList, true))
+      .catch(err => console.error(err))
+  }
 )
 
 // Форма профиля
@@ -69,9 +73,6 @@ api.loadUserInfo()
     console.error(err)
     userInfo.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
   })
-
-
-
 
 
 
