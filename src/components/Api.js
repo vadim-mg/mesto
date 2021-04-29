@@ -16,6 +16,21 @@ export default class Api {
       .catch(err => console.error(`Ошибка: ${err}`))
   }
 
+  saveUserInfo(name, about) {
+    return fetch(this.baseUrl + 'users/me',
+    {
+      method: 'PATCH',
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    })
+  }
+
   loadCards() {
     return fetch(this.baseUrl + 'cards',
       {
@@ -30,4 +45,6 @@ export default class Api {
         return []
       })
   }
+
+
 }

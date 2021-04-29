@@ -26,7 +26,6 @@ const cardList = new Section([], cardsContainer)
 api.loadCards()
   .then(result => result.forEach(item => addCardToList(item, cardList)))
 
-
 // попап для просмотра карточек
 const popupView = new PopupWithImage(popupViewSelector)
 
@@ -39,7 +38,10 @@ const popupAddPlace = new PopupWithForm(
 // Форма профиля
 const popupEditProfile = new PopupWithForm(
   popupEditSelector,
-  item => userInfo.setUserInfo(item.name, item.description)
+  item => {
+    userInfo.setUserInfo(item.name, item.description)
+    api.saveUserInfo(item.name, item.description)
+  }
 )
 
 // Открытие формы редактированя профиля
@@ -48,20 +50,30 @@ const popupEditProfileOpen = inputValues => {
   popupEditProfile.open()
 }
 
-// Создаем екземпляр для профиля
+
 const userInfo = new UserInfo(
   userInfoSettings,
   inputValues => popupEditProfileOpen(inputValues),
-  () => popupAddPlace.open(),
-  () => api.loadUserInfo()
+  () => popupAddPlace.open()
 )
+// Создаем екземпляр для профиля
+api.loadUserInfo()
+    .then((value) => {
+      userInfo.setUserInfo(value.name, value.about)
+      userInfo.showEditButton()
+      userInfo.setAvatar(value.avatar)
+    })
+    .catch(() => {
+      console.error('Получить данные профиля не удалось')
+      userInfo.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
+    })
+
 
 
 
 
 
 //рендеринг, влкючение валидации и обработчиков событий
-userInfo.show()
 enableValidation()
 addEventListeners()
 

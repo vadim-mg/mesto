@@ -21,7 +21,7 @@ export const userInfoSettings = {
   'profileAvatarSelector': '.profile__avatar',
   'profileEditButtonSelector': '.profile__edit-button',
   'profileEditButtonHiddenClass': 'profile__edit-button_hidden',
-  'profileAddButtonSelector': '.profile__add-button'
+  'profileAddPlaceButtonSelector': '.profile__add-place-button'
 }
 
 

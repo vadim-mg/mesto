@@ -1,4 +1,4 @@
-.profile__add-button {
+.profile__add-place-button {
   box-sizing: border-box;
   width: 100%;
   margin-top: 32px;
@@ -12,18 +12,18 @@
   background-position: center;
 }
 
-.profile__add-button:hover {
+.profile__add-place-button:hover {
   opacity: 60%;
   transition: 0.5s;
   cursor: pointer;
 }
 
-.profile__add-button:focus {
+.profile__add-place-button:focus {
   outline: 0;
 }
 
 @media screen and (min-width:576px) {
-  .profile__add-button {
+  .profile__add-place-button {
     width: 17.36vw;
     max-width: 150px;
     transform: translateY(10px);
