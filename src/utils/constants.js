@@ -7,7 +7,7 @@ export const cardSelectors = {
   'imageSelector': '.element__image',
   'binSelector': '.element__bin',
   'captionSelector': '.element__caption',
-  'textSelector': '.element__text',
+  'nameSelector': '.element__text',
   'likeSelector': '.element__like',
   'likeActiveClass': 'element__like_active',
   'likeCountSelector': '.element__like-count'
@@ -19,6 +19,7 @@ export const popupViewImageSelector = '.popup__picture-image'
 export const popupViewNameSelector = '.popup__picture-name'
 
 export const popupAddPlaceSelector = '.popup_add'
+export const popupDeletePlaceSelector = '.popup_delete'
 export const popupEditSelector = '.popup_edit'
 
 export const formSelector = 'form.popup__container'

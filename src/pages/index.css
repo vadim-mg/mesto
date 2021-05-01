@@ -47,12 +47,15 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_add/popup_add.css);
+@import url(../blocks/popup/_delete/popup_delete.css);
 @import url(../blocks/popup/_view/popup_view.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_xl/popup__container_xl.css);
+@import url(../blocks/popup/__container/_sm/popup__container_sm.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__fields/popup__fields.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
+@import url(../blocks/popup/__caption/_sm/popup__caption_sm.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__error/popup__error.css);

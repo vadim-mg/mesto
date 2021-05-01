@@ -7,41 +7,51 @@ export default class Card {
    * @param {Number} likeCount
    * @param {Object} Selectors
    * @param {function} handleCardClick - обработычик клика по карточке
+   * @param {function} handleBinClick - обработычик клика по корзине
    */
-  constructor(link,
-    text,
-    likeCount,
-    { cardTemplateSelector,
+  constructor(
+    {
+      _id,
+      link,
+      name,
+      likes
+    },
+    {
+      cardTemplateSelector,
       elementSelector,
       imageSelector,
       binSelector,
       captionSelector,
-      textSelector,
+      nameSelector,
       likeSelector,
       likeActiveClass,
       likeCountSelector
     },
-    handleCardClick
+    handleCardClick,
+    handleBinClick
   ) {
     this._templateSelector = cardTemplateSelector
     this._elementSelector = elementSelector
     this._imageSelector = imageSelector
     this._binSelector = binSelector
     this._captionSelector = captionSelector
-    this._textSelector = textSelector
+    this._nameSelector = nameSelector
     this._likeSelector = likeSelector
     this._likeActiveClass = likeActiveClass
     this._likeCountSelector = likeCountSelector
 
+    this._id = _id
     this._link = link
-    this._text = text
-    this._likeCount = likeCount
+    this._name = name
+    this._likeCount = likes && likes.length || 0
     this._handleCardClick = handleCardClick
+    this._handleBinClick = handleBinClick
 
     this._init()
     this._setEventListeners()
   }
 
+  getId = () => this._id
 
   /**
    * Возвращает блок с карточкой
@@ -62,13 +72,17 @@ export default class Card {
     const image = this._card
       .querySelector(this._imageSelector)
     image.src = this._link
-    image.alt = this._text
+    image.alt = this._name
     this._card
-      .querySelector(this._textSelector)
-      .textContent = this._text
+      .querySelector(this._nameSelector)
+      .textContent = this._name
     this._card
       .querySelector(this._likeCountSelector)
       .textContent = this._likeCount
+  }
+
+  disableBin = () =>{
+    this._card.querySelector(this._binSelector).remove()
   }
 
 
@@ -81,9 +95,12 @@ export default class Card {
       .addEventListener('click', this._handleLikeIcon.bind(this))
     this._card
       .querySelector(this._binSelector)
-      .addEventListener('click', this._handleDeleteCard.bind(this))
+      .addEventListener('click', (evt) => {
+        evt.stopPropagation()
+        this._handleBinClick(evt)
+      })
     this._card
-      .addEventListener('click', () => this._handleCardClick(this._link, this._text))
+      .addEventListener('click', () => this._handleCardClick(this._link, this._name))
   }
 
 
@@ -99,9 +116,8 @@ export default class Card {
   /**
    * удаление карточки
    */
-  _handleDeleteCard(evt) {
-    evt.stopPropagation()
-    evt.target.closest(this._elementSelector).remove()
+  deleteCard() {
+    this._card.remove()
   }
 
 }

@@ -31,8 +31,6 @@ export default class FormValidator {
    * Вешаем обработчики
    */
   _setFormEventListeners = () => {
-    this._form
-      .addEventListener('submit', evt => evt.preventDefault())
 
     //При сбросе полей делаем кнопку неактивной
     this._form

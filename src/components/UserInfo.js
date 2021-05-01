@@ -41,10 +41,13 @@ export default class UserInfo {
   }
 
 
-  setUserInfo = (name, description) => {
+  setUserInfo = ({name, about, _id}) => {
     this._name.textContent = name
-    this._description.textContent = description
+    this._description.textContent = about
+    this._id = _id
   }
+
+  itIsMe = id => id === this._id
 
 
   setAvatar = url =>

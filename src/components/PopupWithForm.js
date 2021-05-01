@@ -14,6 +14,8 @@ export default class PopupWithForm extends Popup {
     this._submitFunction = submitFunction
   }
 
+  get = () => this._form
+
   /**
    * Возвращает все поля формы
    * @returns Array - с индексами равными аттрибут name у поля и значением value
@@ -39,10 +41,15 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners()
-    this._form.addEventListener('submit', () => {
-      this._submitFunction(this._getInputValues())
-      this.close()
-      this._form.reset()
+    this._form.addEventListener('submit', evt => {
+      this._handlerSubmit(evt)
     })
+  }
+
+  _handlerSubmit(evt) {
+    evt.preventDefault()
+    this._submitFunction(this._getInputValues())
+    this.close()
+    this._form.reset()
   }
 }

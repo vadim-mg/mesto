@@ -45,6 +45,12 @@ export default class Api {
     'POST',
     {name: name, link: link}
   )
+
+  deleteCard = (id) => this._fetch(
+    'cards/'+id,
+    'Ошибка удаления карточки',
+    'DELETE'
+  )
 }
 
 
