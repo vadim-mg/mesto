@@ -99,11 +99,6 @@ const popupEditProfileOpen = inputValues => {
 }
 
 
-//влкючение валидации и обработчиков событий
-enableValidation()
-addEventListeners()
-
-
 /**
  * Создает экземпляр карточки и добавляет его в список
  * @param {Object} { link, name, likes } - данные для карточки
@@ -111,22 +106,39 @@ addEventListeners()
  * @param {boolean} prepend - if true add to end
  * @param {Object} cardSelectors - селекторы для карточек
  */
-function addCardToList(cardValues, cardList, prepend = false, selectors = cardSelectors) {
+const addCardToList = (cardValues, cardList, prepend = false, selectors = cardSelectors) => {
+  const thisCardLikedMine = thisCard =>
+    thisCard.getLikesOwnerIds()
+      .some(item => userInfo.itIsMe(item))
+
+  const like = card =>
+    api.like(card.getId(), !thisCardLikedMine(card))
+      .then(val => card.setCard(val))
+      .catch(err => console.error(err))
+
   const card = new Card(
     cardValues,
     selectors,
     (link, name) => popupView.open({ link: link, name: name }),
-    (evt) => popupDeleteCard.open(card, card.deleteCard),
+    (evt) => popupDeleteCard.open(card, card.removeCard),
+    (evt) => like(card)
   )
-  if (!userInfo.itIsMe(cardValues.owner._id)) card.disableBin()
+
+  if (!userInfo.itIsMe(cardValues.owner._id))
+    card.disableBin()
+
+  if (thisCardLikedMine(card))
+    card.setLikeStatus()
+
   cardList.addItem(card.getCard(), prepend)
 }
+
 
 
 /**
  * Включаем валидацию для всех форм
  */
-function enableValidation() {
+const enableValidation = () => {
   [
     popupAddPlace,
     popupEditProfile
@@ -137,10 +149,9 @@ function enableValidation() {
 }
 
 /**
- * Вешаем обработчики
+ * Вешаем обработчики на попапы
  */
-function addEventListeners() {
-  // включаем обработчики на формах
+const addEventListeners = () => {
   popupView
     .setEventListeners()
   popupAddPlace
@@ -152,3 +163,9 @@ function addEventListeners() {
   userInfo
     .setEventListeners()
 }
+
+
+
+//влкючение валидации и обработчиков событий
+enableValidation()
+addEventListeners()

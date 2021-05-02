@@ -51,6 +51,12 @@ export default class Api {
     'Ошибка удаления карточки',
     'DELETE'
   )
+
+  like = (id, set = true) => this._fetch(
+    'cards/likes/' + id,
+    `Ошибка ${set ? 'установки' : 'снятия'} лайка`,
+    set ? 'PUT' :'DELETE'
+  )
 }
 
 

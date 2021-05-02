@@ -2,122 +2,141 @@ export default class Card {
 
   /**
    * Создание карточки
-   * @param {string} link
-   * @param {string} text
-   * @param {Number} likeCount
-   * @param {Object} Selectors
-   * @param {function} handleCardClick - обработычик клика по карточке
-   * @param {function} handleBinClick - обработычик клика по корзине
+   * @param {Object} cardData
+   * @param {Object} selectors {cardTemplateSelector, elementSelector, imageSelector,
+   *  binSelector, nameSelector,likeSelector, likeActiveClass, likeCountSelector }
+   * @param {function} showCardMethod - обработчик открытия карточки
+   * @param {function} deleteCardMethod - обработчик удаления карточки
+   * @param {function} likeSetMethod - обработчик клика по лайку
    */
   constructor(
-    {
-      _id,
-      link,
-      name,
-      likes
-    },
-    {
-      cardTemplateSelector,
-      elementSelector,
-      imageSelector,
-      binSelector,
-      captionSelector,
-      nameSelector,
-      likeSelector,
-      likeActiveClass,
-      likeCountSelector
-    },
-    handleCardClick,
-    handleBinClick
+    cardData,
+    selectors,
+    showCardMethod,
+    deleteCardMethod,
+    likeSetMethod
   ) {
-    this._templateSelector = cardTemplateSelector
-    this._elementSelector = elementSelector
-    this._imageSelector = imageSelector
-    this._binSelector = binSelector
-    this._captionSelector = captionSelector
-    this._nameSelector = nameSelector
-    this._likeSelector = likeSelector
-    this._likeActiveClass = likeActiveClass
-    this._likeCountSelector = likeCountSelector
 
-    this._id = _id
-    this._link = link
-    this._name = name
-    this._likeCount = likes && likes.length || 0
-    this._handleCardClick = handleCardClick
-    this._handleBinClick = handleBinClick
+    this._showCardMethod = showCardMethod
+    this._deleteCardMethod = deleteCardMethod
+    this._likeSetMethod = likeSetMethod
 
-    this._init()
+    this._init(selectors)
+    this.setCard(cardData)
     this._setEventListeners()
   }
 
-  getId = () => this._id
 
   /**
-   * Возвращает блок с карточкой
+   * Инициаоизация карточки, клонирование элемента из шаблона
+   */
+  _init = ({
+    cardTemplateSelector,
+    elementSelector,
+    imageSelector,
+    binSelector,
+    nameSelector,
+    likeSelector,
+    likeActiveClass,
+    likeCountSelector
+  }) => {
+    this._likeActiveClass = likeActiveClass
+
+    this._card = document.querySelector(cardTemplateSelector)
+      .content.querySelector(elementSelector).cloneNode(true)
+    this._image = this._card.querySelector(imageSelector)
+    this._binButton = this._card.querySelector(binSelector)
+    this._nameElement = this._card.querySelector(nameSelector)
+    this._likeElement = this._card.querySelector(likeSelector)
+    this._likeCountElement = this._card.querySelector(likeCountSelector)
+  }
+
+  /**
+   * Установка значений елементов карточки
+   * @param {Object} данные карточки { _id, link, name, likes }
+   */
+  setCard = ({ _id, link, name, likes }) => {
+    this._id = _id
+    this._link = link
+    this._name = name
+    this._likes = likes
+    this._likeCount = likes && likes.length || 0
+
+    this._image.src = this._link
+    this._image.alt = this._name
+    this._nameElement.textContent = this._name
+    this._likeCountElement.textContent = this._likeCount
+  }
+
+
+  /**
+   * Возращает блок с карточкой
    * @returns Node
    */
   getCard = () => this._card
 
 
   /**
-   * Инициаоизация карточки, клонирование элемента из шаблона, заполнение атрибутов,
+   * Возращает id карточки
+   * @returns string
    */
-  _init() {
-    this._card = document
-      .querySelector(this._templateSelector)
-      .content
-      .querySelector(this._elementSelector)
-      .cloneNode(true)
-    const image = this._card
-      .querySelector(this._imageSelector)
-    image.src = this._link
-    image.alt = this._name
-    this._card
-      .querySelector(this._nameSelector)
-      .textContent = this._name
-    this._card
-      .querySelector(this._likeCountSelector)
-      .textContent = this._likeCount
-  }
-
-  disableBin = () =>{
-    this._card.querySelector(this._binSelector).remove()
-  }
+  getId = () => this._id
 
 
   /**
-   * утановка обработчиков событий для карточек
+   * Возращает массив Id пользователей, кликнувших карточку
+   * @returns Array
    */
-  _setEventListeners() {
-    this._card
-      .querySelector(this._likeSelector)
-      .addEventListener('click', this._handleLikeIcon.bind(this))
-    this._card
-      .querySelector(this._binSelector)
-      .addEventListener('click', (evt) => {
-        evt.stopPropagation()
-        this._handleBinClick(evt)
-      })
-    this._card
-      .addEventListener('click', () => this._handleCardClick(this._link, this._name))
-  }
+  getLikesOwnerIds = () => this._likes.map(item => item._id)
 
 
   /**
-  * смена стилей на лайке
-  */
-  _handleLikeIcon(evt) {
-    evt.stopPropagation()
-    evt.target.classList.toggle(this._likeActiveClass)
-  }
+   * Удаляет кнопку с корзиной с карточки
+   */
+  disableBin = () => this._binButton.remove()
 
 
   /**
    * удаление карточки
    */
-  deleteCard() {
-    this._card.remove()
+  removeCard = () => this._card.remove()
+
+
+  /**
+   * Установка какточке статуса лайка, текущим пользьвателем
+   */
+  setLikeStatus = () => this._likeElement.classList.add(this._likeActiveClass)
+
+
+  /**
+   * утановка обработчиков событий для карточек
+   */
+  _setEventListeners = () => {
+    this._likeElement.addEventListener('click',
+      this._handleLikeIconClick.bind(this))
+    this._binButton.addEventListener('click',
+      this._handleBinButtonClick.bind(this))
+    this._card.addEventListener('click',
+      this._showCardMethod.bind(this, this._link, this._name))
+  }
+
+
+  /**
+  * обработчик клика по лайку
+  */
+  _handleLikeIconClick = evt => {
+    evt.stopPropagation()
+    evt.target.classList.toggle(this._likeActiveClass)
+    this._likeSetMethod()
+  }
+
+
+  /**
+   * обработчик клика по корзине
+   */
+  _handleBinButtonClick = evt => {
+    evt.stopPropagation()
+    this._deleteCardMethod(evt)
   }
 
 }

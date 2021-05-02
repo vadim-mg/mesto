@@ -6,7 +6,7 @@ export const cardSelectors = {
   'elementSelector': '.element',
   'imageSelector': '.element__image',
   'binSelector': '.element__bin',
-  'captionSelector': '.element__caption',
+  // 'captionSelector': '.element__caption',
   'nameSelector': '.element__text',
   'likeSelector': '.element__like',
   'likeActiveClass': 'element__like_active',
