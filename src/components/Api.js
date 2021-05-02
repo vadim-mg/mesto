@@ -6,6 +6,14 @@ export default class Api {
     this.baseUrl = baseUrl
   }
 
+  /**
+   * Вызов API
+   * @param {String} adress - переменная часть адреса запроса
+   * @param {String} error - текст ошибки для передачи в Catch, в случае ошибки
+   * @param {String} method1, по дефолту GET
+   * @param {Object} rest - другие параметры
+   * @returns
+   */
   _fetch = (adress, error = 'какая-то ошибка', method1 = 'GET', rest) => fetch(
     this.baseUrl + adress,
     {
@@ -39,23 +47,36 @@ export default class Api {
     'Ошибка загрузки карточек'
   )
 
-  saveCard = ({link, name}) => this._fetch(
+  saveCard = ({ link, name }) => this._fetch(
     'cards',
     'Ошибка сохранения карточки',
     'POST',
-    {name: name, link: link}
+    { name: name, link: link }
   )
 
   deleteCard = (id) => this._fetch(
-    'cards/'+id,
+    'cards/' + id,
     'Ошибка удаления карточки',
     'DELETE'
   )
 
-  like = (id, set = true) => this._fetch(
+  /**
+   * Установка - снятие лайка на сервере
+   * @param {String} id - карточки
+   * @param {Boolean} value: true - поставить лайк, false -снять
+   * @returns
+   */
+  like = (id, value = true) => this._fetch(
     'cards/likes/' + id,
-    `Ошибка ${set ? 'установки' : 'снятия'} лайка`,
-    set ? 'PUT' :'DELETE'
+    `Ошибка ${value ? 'установки' : 'снятия'} лайка`,
+    value ? 'PUT' : 'DELETE'
+  )
+
+  setAvatar = (link) => this._fetch(
+    'users/me/avatar',
+    'Ошибка утановки аватара',
+    'PATCH',
+    { avatar: link }
   )
 }
 

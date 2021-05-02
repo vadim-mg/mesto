@@ -6,7 +6,6 @@ export const cardSelectors = {
   'elementSelector': '.element',
   'imageSelector': '.element__image',
   'binSelector': '.element__bin',
-  // 'captionSelector': '.element__caption',
   'nameSelector': '.element__text',
   'likeSelector': '.element__like',
   'likeActiveClass': 'element__like_active',
@@ -20,7 +19,8 @@ export const popupViewNameSelector = '.popup__picture-name'
 
 export const popupAddPlaceSelector = '.popup_add'
 export const popupDeletePlaceSelector = '.popup_delete'
-export const popupEditSelector = '.popup_edit'
+export const popupEditSelector = '.popup_edit-profile'
+export const popupEditAvatarSelector = '.popup_edit-avatar'
 
 export const formSelector = 'form.popup__container'
 
@@ -30,6 +30,8 @@ export const userInfoSettings = {
   'profileNameSelector': '.profile__name',
   'profileDescriptionSelector': '.profile__description',
   'profileAvatarSelector': '.profile__avatar',
+  'profileAvatarInvisibleClass' : 'profile__avatar_invisible',
+  'profileAvatarEditSelector': '.profile__avatat-edit-button',
   'profileEditButtonSelector': '.profile__edit-button',
   'profileEditButtonHiddenClass': 'profile__edit-button_hidden',
   'profileAddPlaceButtonSelector': '.profile__add-place-button'

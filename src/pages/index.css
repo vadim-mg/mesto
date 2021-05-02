@@ -16,13 +16,16 @@
 @import url(../blocks/content/content.css);
 /*  */
 
+
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar/_invisible/profile__avatar_invisible.css);
+@import url(../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__edit-button/_hidden/profile__edit-button_hidden.css);
-
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__add-place-button/profile__add-place-button.css);
 /*  */

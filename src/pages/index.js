@@ -4,6 +4,7 @@ import {
   popupEditSelector,
   popupAddPlaceSelector,
   popupDeletePlaceSelector,
+  popupEditAvatarSelector,
   validationParams,
   cardsContainer,
   userInfoSettings,
@@ -24,12 +25,17 @@ const api = new Api(apiSettings)
 // Создаем екземпляр для профиля
 const userInfo = new UserInfo(
   userInfoSettings,
-  inputValues => popupEditProfileOpen(inputValues),
-  () => popupAddPlace.open()
+  inputValues => {
+    popupEditProfile.setInputValues(inputValues)
+    popupEditProfile.open()
+  },
+  () => popupAddPlace.open(),
+  inputValues => {
+    popupUpdateAvatar.setInputValues(inputValues)
+    popupUpdateAvatar.open()
+  }
 )
 
-// Создаем екземпляр для блока с карточками
-const cardList = new Section([], cardsContainer)
 
 // Загружаем инфу о профиле
 const userInfoLoad = api.loadUserInfo()
@@ -43,15 +49,21 @@ const userInfoLoad = api.loadUserInfo()
     userInfo.setUserInfo('Профиль не загружен!', 'Что-то пошло не так...')
   })
 
+
 // Загружаем карточки
 let cardItems = []
 const cardsLoad = api.loadCards()
   .then(result => cardItems = result)
   .catch(err => console.error(err))
 
+
+// Создаем екземпляр для блока с карточками
+const cardList = new Section([], cardsContainer)
+
+
 // Когда все данные получены рендерим карточки
 Promise.allSettled([userInfoLoad, cardsLoad])
-  .then(() => cardItems.forEach(
+  .then(result => cardItems.forEach(
     item => addCardToList(item, cardList)))
 
 
@@ -64,39 +76,44 @@ const popupAddPlace = new PopupWithForm(
   popupAddPlaceSelector,
   item => {
     api.saveCard(item)
-      .then(item => addCardToList(item, cardList, true))
+      .then(result => addCardToList(result, cardList, true))
       .catch(err => console.error(err))
   }
 )
+
 
 // Попап с формой профиля
 const popupEditProfile = new PopupWithForm(
   popupEditSelector,
   item => {
     api.saveUserInfo(item.name, item.description)
-      .then((item) => {
-        userInfo.setUserInfo(item)
-      })
+      .then(result => userInfo.setUserInfo(result))
       .catch(err => console.error(err))
   }
 )
 
 
+// Попап с формой подтверждения удаления карточки
 const popupDeleteCard = new PopupSubmitForm(
   popupDeletePlaceSelector,
   item => {
     api.deleteCard(popupDeleteCard.subject.getId())
-      .then(() => popupDeleteCard.submit())
-      .catch((err) => console.error(err))
+      .then(result => popupDeleteCard.submit())
+      .catch(err => console.error(err))
   }
 )
 
+//попап с редактированием аватара
+const popupUpdateAvatar = new PopupWithForm(
+  popupEditAvatarSelector,
+  item => {
+    debugger
+    api.setAvatar(item.link)
+      .then(result => userInfo.setAvatar(result.avatar))
+      .catch(err => console.error(err))
+  }
+)
 
-// Открытие формы редактированя профиля
-const popupEditProfileOpen = inputValues => {
-  popupEditProfile.setInputValues(inputValues)
-  popupEditProfile.open()
-}
 
 
 /**
@@ -111,17 +128,14 @@ const addCardToList = (cardValues, cardList, prepend = false, selectors = cardSe
     thisCard.getLikesOwnerIds()
       .some(item => userInfo.itIsMe(item))
 
-  const like = card =>
-    api.like(card.getId(), !thisCardLikedMine(card))
-      .then(val => card.setCard(val))
-      .catch(err => console.error(err))
-
   const card = new Card(
     cardValues,
     selectors,
     (link, name) => popupView.open({ link: link, name: name }),
-    (evt) => popupDeleteCard.open(card, card.removeCard),
-    (evt) => like(card)
+    () => popupDeleteCard.open(card, card.removeCard),
+    () => api.like(card.getId(), !thisCardLikedMine(card))
+      .then(val => card.setCard(val))
+      .catch(err => console.error(err))
   )
 
   if (!userInfo.itIsMe(cardValues.owner._id))
@@ -141,7 +155,8 @@ const addCardToList = (cardValues, cardList, prepend = false, selectors = cardSe
 const enableValidation = () => {
   [
     popupAddPlace,
-    popupEditProfile
+    popupEditProfile,
+    popupUpdateAvatar
   ]
     .forEach(form =>
       new FormValidator(validationParams, form.get())
@@ -159,6 +174,8 @@ const addEventListeners = () => {
   popupEditProfile
     .setEventListeners()
   popupDeleteCard
+    .setEventListeners()
+  popupUpdateAvatar
     .setEventListeners()
   userInfo
     .setEventListeners()

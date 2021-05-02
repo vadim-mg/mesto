@@ -8,11 +8,14 @@ export default class UserInfo {
     profileNameSelector,
     profileDescriptionSelector,
     profileAvatarSelector,
+    profileAvatarEditSelector,
+    profileAvatarInvisibleClass,
     profileEditButtonSelector,
     profileEditButtonHiddenClass,
     profileAddPlaceButtonSelector },
     editProfilFunction,
-    addPlaceFunction
+    addPlaceFunction,
+    updateAvatarFunction
   ) {
     const profile =
       document.querySelector(profileSelector)
@@ -22,14 +25,18 @@ export default class UserInfo {
       profile.querySelector(profileDescriptionSelector)
     this._avatar =
       profile.querySelector(profileAvatarSelector)
+    this._avatarEditButton =
+      profile.querySelector(profileAvatarEditSelector)
     this._profileEditButton =
       profile.querySelector(profileEditButtonSelector)
     this._placeAddButton =
       profile.querySelector(profileAddPlaceButtonSelector)
 
     this._buttonHiddenClass = profileEditButtonHiddenClass
+    this._avatarInvisibleClass = profileAvatarInvisibleClass
 
     this._editProfileFunction = editProfilFunction
+    this._updateAvatarFunction = updateAvatarFunction
     this._addPlaceFunction = addPlaceFunction
   }
 
@@ -41,7 +48,7 @@ export default class UserInfo {
   }
 
 
-  setUserInfo = ({name, about, _id}) => {
+  setUserInfo = ({ name, about, _id }) => {
     this._name.textContent = name
     this._description.textContent = about
     this._id = _id
@@ -50,8 +57,10 @@ export default class UserInfo {
   itIsMe = id => id === this._id
 
 
-  setAvatar = url =>
+  setAvatar = url => {
     this._avatar.src = url
+    this._avatar.classList.remove(this._avatarInvisibleClass)
+  }
 
 
   showEditButton = () =>
@@ -64,9 +73,15 @@ export default class UserInfo {
       .addEventListener('click', () => {
         this._editProfileFunction(this.getUserInfo())
       })
+    this._avatarEditButton
+      .addEventListener('click', () => {
+        this._updateAvatarFunction({ link: this._avatar.src })
+      })
     this._placeAddButton
       .addEventListener('click', () => {
         this._addPlaceFunction()
       })
+    // this._avatar
+    // .addEventListener('load')
   }
 }

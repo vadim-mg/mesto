@@ -16,7 +16,10 @@
   </header>
   <main class="content container">
     <section class="profile">
-      <img src="" alt="" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="" alt="" class="profile__avatar profile__avatar_invisible">
+        <button type="button" class="profile__avatat-edit-button"></button>
+      </div>
       <div class="profile__info">
         <h1 class="profile__name"></h1><button class="profile__edit-button profile__edit-button_hidden" type="button"
                 aria-label="edit_profile"></button>
@@ -42,7 +45,7 @@
     <p class="footer__copyright">&COPY; 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup popup_edit">
+  <div class="popup popup_edit-profile">
     <form name="popup-edit" class="popup__container" autocomplete="off" novalidate>
       <button class="popup__close-button" type="button" aria-label="close_popup"></button>
       <fieldset class="popup__fields">
@@ -53,7 +56,23 @@
           <span class="popup__error"></span>
         </label>
         <label class="popup__field">
-          <input type="text" class="popup__input" name="description" value="" required minlength="2" maxlength="200" placeholder="О себе">
+          <input type="text" class="popup__input" name="description" value="" required minlength="2" maxlength="200"
+                 placeholder="О себе">
+          <span class="popup__error"></span>
+        </label>
+        <button type="submit" class="popup__button">Сохранить</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="popup popup_edit-avatar">
+    <form name="popup-update-avatar" class="popup__container" autocomplete="off" novalidate>
+      <button class="popup__close-button" type="button" aria-label="close_popup"></button>
+      <fieldset class="popup__fields">
+        <legend class="popup__caption">Обновить аватар</legend>
+        <label class="popup__field">
+          <input type="url" class="popup__input" name="link" value="" required
+                 placeholder="Ссылка на изображение с аватаром">
           <span class="popup__error"></span>
         </label>
         <button type="submit" class="popup__button">Сохранить</button>
@@ -67,7 +86,8 @@
       <fieldset class="popup__fields">
         <legend class="popup__caption">Новое место</legend>
         <label class="popup__field">
-          <input type="text" class="popup__input" name="name" value="" required minlength="2" maxlength="30"  placeholder="Название">
+          <input type="text" class="popup__input" name="name" value="" required minlength="2" maxlength="30"
+                 placeholder="Название">
           <span class="popup__error"></span>
         </label>
         <label class="popup__field">
