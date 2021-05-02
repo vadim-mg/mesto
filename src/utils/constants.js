@@ -23,6 +23,7 @@ export const popupEditSelector = '.popup_edit-profile'
 export const popupEditAvatarSelector = '.popup_edit-avatar'
 
 export const formSelector = 'form.popup__container'
+export const popupSubmitButton = '.popup__button'
 
 // Селекторы для профиля
 export const userInfoSettings = {

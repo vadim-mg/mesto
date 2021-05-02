@@ -81,7 +81,5 @@ export default class UserInfo {
       .addEventListener('click', () => {
         this._addPlaceFunction()
       })
-    // this._avatar
-    // .addEventListener('load')
   }
 }

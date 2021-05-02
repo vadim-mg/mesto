@@ -74,44 +74,35 @@ const popupView = new PopupWithImage(popupViewSelector)
 // попап с формой добаления карточек
 const popupAddPlace = new PopupWithForm(
   popupAddPlaceSelector,
-  item => {
-    api.saveCard(item)
-      .then(result => addCardToList(result, cardList, true))
-      .catch(err => console.error(err))
-  }
+  item => api.saveCard(item)
+    .then(result => addCardToList(result, cardList, true))
+    .catch(err => console.error(err))
 )
 
 
 // Попап с формой профиля
 const popupEditProfile = new PopupWithForm(
   popupEditSelector,
-  item => {
-    api.saveUserInfo(item.name, item.description)
-      .then(result => userInfo.setUserInfo(result))
-      .catch(err => console.error(err))
-  }
+  item => api.saveUserInfo(item.name, item.description)
+    .then(result => userInfo.setUserInfo(result))
+    .catch(err => console.error(err))
 )
 
 
 // Попап с формой подтверждения удаления карточки
 const popupDeleteCard = new PopupSubmitForm(
   popupDeletePlaceSelector,
-  item => {
-    api.deleteCard(popupDeleteCard.subject.getId())
-      .then(result => popupDeleteCard.submit())
-      .catch(err => console.error(err))
-  }
+  item => api.deleteCard(popupDeleteCard.subject.getId())
+    .then(result => popupDeleteCard.submit())
+    .catch(err => console.error(err))
 )
 
 //попап с редактированием аватара
 const popupUpdateAvatar = new PopupWithForm(
   popupEditAvatarSelector,
-  item => {
-    debugger
-    api.setAvatar(item.link)
-      .then(result => userInfo.setAvatar(result.avatar))
-      .catch(err => console.error(err))
-  }
+  item => api.setAvatar(item.link)
+    .then(result => userInfo.setAvatar(result.avatar))
+    .catch(err => console.error(err))
 )
 
 
@@ -180,7 +171,6 @@ const addEventListeners = () => {
   userInfo
     .setEventListeners()
 }
-
 
 
 //влкючение валидации и обработчиков событий

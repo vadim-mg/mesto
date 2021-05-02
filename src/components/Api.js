@@ -1,6 +1,5 @@
-// import { get } from "core-js/core/dict"
-
 export default class Api {
+
   constructor({ token, baseUrl }) {
     this.token = token
     this.baseUrl = baseUrl
