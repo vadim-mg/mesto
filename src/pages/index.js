@@ -76,7 +76,6 @@ const popupAddPlace = new PopupWithForm(
   popupAddPlaceSelector,
   item => api.saveCard(item)
     .then(result => addCardToList(result, cardList, true))
-    .catch(err => console.error(err))
 )
 
 
@@ -85,7 +84,6 @@ const popupEditProfile = new PopupWithForm(
   popupEditSelector,
   item => api.saveUserInfo(item.name, item.description)
     .then(result => userInfo.setUserInfo(result))
-    .catch(err => console.error(err))
 )
 
 
@@ -93,8 +91,8 @@ const popupEditProfile = new PopupWithForm(
 const popupDeleteCard = new PopupSubmitForm(
   popupDeletePlaceSelector,
   item => api.deleteCard(popupDeleteCard.subject.getId())
-    .then(result => popupDeleteCard.submit())
-    .catch(err => console.error(err))
+    .then(result => popupDeleteCard.submit()),
+  "Удаление..."
 )
 
 //попап с редактированием аватара
@@ -102,7 +100,6 @@ const popupUpdateAvatar = new PopupWithForm(
   popupEditAvatarSelector,
   item => api.setAvatar(item.link)
     .then(result => userInfo.setAvatar(result.avatar))
-    .catch(err => console.error(err))
 )
 
 

@@ -6,16 +6,12 @@ export default class PopupSubmitForm extends PopupWithForm {
     if (super.open()) {
       this.subject = subject
       this._method = method
+      this._addSubmitListener()
       return true
     }
     return false
   }
 
-  submit = () => this._method.bind(this.subject)()
 
-  _handlerSubmit(evt) {
-    evt.preventDefault()
-    this.close()
-    this._submitFunction(this._getInputValues())
-  }
+  submit = () => this._method.bind(this.subject)()
 }

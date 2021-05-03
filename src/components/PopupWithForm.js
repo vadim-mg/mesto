@@ -7,12 +7,18 @@ export default class PopupWithForm extends Popup {
    * @param {String} popupSelector
    * @param {Function} submitFunction - callback - функция отправки формы
    */
-  constructor(popupSelector, submitFunction) {
+  constructor(popupSelector, submitFunction, processName = "Сохранение...") {
     super(popupSelector)
     this._form = this._element.querySelector(formSelector)
     this._popupSubmitButton = this._element.querySelector(popupSubmitButton)
     this._inputList = this._form.querySelectorAll('input')
     this._submitFunction = submitFunction
+    this._processName = processName
+  }
+
+  open = () => {
+    super.open()
+    this._addSubmitListener()
   }
 
   get = () => this._form
@@ -25,6 +31,7 @@ export default class PopupWithForm extends Popup {
     acc[i.name] = i.value
     return acc
   }, {})
+
 
   /**
    * Заполнение полей значениями из объекта data
@@ -39,10 +46,10 @@ export default class PopupWithForm extends Popup {
   }
 
 
-  setEventListeners = () => {
-    super.setEventListeners()
-    this._form.addEventListener('submit', evt => this._handlerSubmit(evt))
-  }
+  _addSubmitListener = () =>
+    this._form.addEventListener('submit', this._handlerSubmit)
+  _removeSubmitListener = () =>
+    this._form.removeEventListener('submit', this._handlerSubmit)
 
 
   /**
@@ -51,20 +58,26 @@ export default class PopupWithForm extends Popup {
    */
   _handlerSubmit = evt => {
     evt.preventDefault()
+    this._removeSubmitListener()
+    this._popupSubmitButton.setAttribute('disabled', 'true')
 
-    const action = new Promise((resolve, reject) => {
-      this._popupSubmitButton.textContent = "Сохраняется..."
-      this._popupSubmitButton.setAttribute('disabled', 'true')
-      this._submitFunction(this._getInputValues())
-        .then(result => resolve('Форма закрыта'))
-    })
+    const buttonText = this._popupSubmitButton.textContent
+    this._popupSubmitButton.textContent = this._processName
 
-    Promise.race([action])
+    this._submitFunction(this._getInputValues())
       .then(val => {
         this.close()
-        this._form.reset()
-        this._popupSubmitButton.textContent = "Сохранить"
+        setTimeout(() => {
+          this._form.reset()
+          this._popupSubmitButton.textContent = buttonText
+        }, 500)
       })
+      .catch(err => {
+        console.error(err)
+        this._addSubmitListener()
+        this._popupSubmitButton.textContent = buttonText
+      })
+      .then(val => this._popupSubmitButton.removeAttribute('disabled'))
   }
 
 
