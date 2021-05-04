@@ -4,8 +4,10 @@
   "description": "### Обзор",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack serve"
+    "build": "webpack --mode production --config prod.webpack.config.js",
+    "dev": "webpack serve --config dev.webpack.config.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.2",
     "cssnano": "^5.0.1",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.4.1",
     "postcss-loader": "^5.2.0",
